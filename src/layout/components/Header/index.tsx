@@ -6,6 +6,7 @@ import Logo from '@/layout/components/Logo';
 import LoginButton from '@/modules/auth/components/LoginButton';
 import { usePathname } from 'next/navigation';
 
+
 const Header: React.FC = () => {
   const pathname = usePathname();
   const [lastScrollY, setLastScrollY] = useState(0);

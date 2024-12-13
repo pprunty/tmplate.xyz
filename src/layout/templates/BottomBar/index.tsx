@@ -17,10 +17,21 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ children, showFooter = fals
   const pathname = usePathname();
   const t = useTranslations('Layout');
 
+  // Header height for mobile devices
+  const mobileHeaderHeight = '7em'; // 56px (h-14 in Tailwind)
+
   return (
     <div className="relative min-h-screen pb-[56px]">
       <Header />
-      <main className="relative z-0">{children}</main>
+      {/* Add a dynamic margin-top for main */}
+      <main
+        className="relative z-0"
+        style={{
+          marginTop: mobileHeaderHeight, // Dynamically apply margin-top
+        }}
+      >
+        {children}
+      </main>
       {showFooter && <Footer />}
 
       <nav className="block md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 dark:border-[#333] bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-55 backdrop-blur-sm text-black dark:text-gray-300">

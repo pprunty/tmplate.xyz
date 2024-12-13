@@ -28,7 +28,7 @@ const LoginButton: React.FC<LoginButtonProps> = ({ className }) => {
         Log In
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Log in" size="md">
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Log in" size="full">
         <LoginForm />
       </Modal>
     </>
