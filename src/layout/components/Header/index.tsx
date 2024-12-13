@@ -193,7 +193,7 @@ useEffect(() => {
                   <Link
                     key={href}
                     href={href}
-                    className={`px-4 py-2 rounded-full text-sm font-light transition-colors duration-300
+                    className={`px-4 py-2 rounded-full text-xs font-light transition-colors duration-300
                       ${
                         isActive
                           ? 'bg-[#DC70FF] dark:bg-[#DC70FF] dark:text-black text-white'
