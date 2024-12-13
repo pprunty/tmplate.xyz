@@ -1,0 +1,12 @@
+{
+  "Layout": {
+    "home": "Home",
+    "search": "Search",
+    "profile": "Profile",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "customers": "Customers",
+    "discounts": "Discounts"
+  }
+}

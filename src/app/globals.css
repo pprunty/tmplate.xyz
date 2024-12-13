@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root {
+    /* Font setup */
+    font-family: "Inter", sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+
+    @apply bg-[#fcfcfc];
+    @apply text-[#000];
+  }
+
+  img {
+    height: inherit !important;
+  }
+
+  /* Dark mode settings */
+  :root.dark {
+    color-scheme: dark;
+    /* You can change theme dark color here to #131313 for example, remember to change it in theme-effect.ts too */
+    @apply bg-[#000];
+    @apply text-[#fcfcfc];
+  }
+
+  /* Prevent transition delays */
+  :root.pause-transitions * {
+    transition-duration: 0ms !important;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+
+  /* Optimize font rendering */
+  @supports (font-variation-settings: normal) {
+    :root {
+      font-family: "Inter var", sans-serif;
+    }
+  }
+
+  /* Customize scrollbar for WebKit browsers (Chrome, Safari) */
+  /* Light mode scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 4px; /* Make scrollbar narrower */
+    height: 4px;
+  }
+
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #000; /* Black thumb */
+    border-radius: 0px;
+  }
+
+  /* Dark mode scrollbar styles */
+  .dark ::-webkit-scrollbar-track {
+    background: #1c1c1c; /* Dark gray track */
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Light gray thumb */
+  }
+
+  /* Customize scrollbar for Firefox */
+  /* Light mode */
+  * {
+    scrollbar-width: thin; /* Make scrollbar narrower */
+  }
+
+  pre {
+    margin: 1rem 0 !important;
+  }
+
+    blockquote, dl, dd, hr, pre {
+        margin: 1rem 0 !important;
+    }
+
+  /* Apply global styles to pre and code tags */
+  pre code {
+    font-family: monospace;
+    font-size: 14px; /* Ensure code within pre has smaller font */
+  }
+
+  code {
+    padding: 0.25rem;
+    font-family: monospace;
+  }
+
+  :root.dark pre {
+    background-color: #2b2b2b; /* Dark mode background for pre */
+  }
+
+  :root.dark code {
+    background-color: #1c1c1c; /* Dark mode background for inline code */
+  }
+
+  .toc {
+    font-family: Arial, sans-serif; /* Example font */
+    color: #4a5568; /* Example text color */
+  }
+
+  .toc a {
+    transition: color 0.3s ease;
+  }
+
+  .toc a:hover {
+    color: #2b6cb0; /* Example hover color */
+  }
+
+/* Hide scrollbars for iOS and all devices */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  overflow: hidden;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+/* Ensures horizontal overflow is hidden on iOS */
+.hide-scrollbar {
+  overflow-x: hidden !important;
+}
+
+}
+
+/* Initial state */
+[data-animate-image] .image-animate {
+  opacity: 0;
+}
+
+/* Initial state */
+[data-animate-image] .image-animate {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Animation when the image comes into view */
+[data-animate-image] .image-animate.animate-once[data-animate="zoom-fade-small"] {
+  animation: zoom-fade-small 0.8s ease-in forwards;
+}
+
+/* New animation when the image is clicked */
+.image-click-animate {
+  animation: click-animation 0.5s ease;
+}
+
+@keyframes zoom-fade-small {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes click-animation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "productionUrl": "https://tmplate.xyz",
+  "layout": {
+    "mobile": "header_and_footer",
+    "desktop": "bottom_bar"
+  },
+  "routing": {
+    "primary": {
+    },
+    "secondary": {
+    },
+    "admin": {
+    }
+  },
+  "analytics": {
+    "gaMeasurementId": "",
+    "useVercelAnalytics": true
+  },
+  "seo": {
+    "title": "tmplate.xyz",
+    "description": "Pure Web Design",
+    "publisher": {
+      "name": "Patrick Prunty",
+      "logo": "/icon.webp"
+    },
+    "bio": "high-performance, customisable nextjs blog template",
+    "keywords": [
+      "blog.v2",
+      "nextjs",
+      "digital blog",
+      "open source",
+      "web development",
+      "ui/ux",
+      "high-performance",
+      "patrick prunty",
+      "minimalistic"
+    ],
+    "socials": {
+      "twitter": "",
+      "strava": "https://www.strava.com/athletes/72636452",
+      "github": "https://github.com/pprunty/blog.v2",
+      "linkedin": "https://www.linkedin.com/in/patrickprunty/",
+      "reddit": "",
+      "tiktok": "",
+      "instagram": "https://www.instagram.com/pprunty97/",
+      "youtube": "",
+      "email": "patrickprunty.business@gmail.com"
+    },
+    "blog": {
+      "is_blog_user_configured": true
+    }
+  }
+}
