@@ -22,7 +22,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children }) => {
   return (
     <div className="hidden sm:flex h-screen">
       <aside className="flex flex-col w-52 border-r border-gray-200 dark:border-[#252525] bg-white dark:bg-[#111] text-gray-900 dark:text-white ">
-        <div className="p-4 border-gray-200 dark:border-[#252525] flex items-center">
+        <div className="border-gray-200 dark:border-[#252525] flex items-center">
           <Logo/>
         </div>
         <nav className="flex-1 overflow-auto pt-4">
