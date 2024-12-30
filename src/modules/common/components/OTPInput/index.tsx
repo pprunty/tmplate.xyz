@@ -6,9 +6,9 @@ interface OTPInputProps {
   id: string;
   name: string;
   length: number;
-  onChange: (event: { target: { name: string; value: string } }) => void; // Updated to match the expected argument
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void; // Updated to accept an event
-  onFullFill?: () => void; // Make this optional
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onFullFill?: () => void;
   setFieldError: (field: string, message: string) => void;
   setFieldTouched: (field: string, isTouched: boolean) => void;
   autoFocus?: boolean;
@@ -36,21 +36,12 @@ const OTPInput: React.FC<OTPInputProps> = ({
   const [errors, setErrors] = useState(Array(length).fill(false));
   const [localOtp, setLocalOtp] = useState(new Array(length).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-//   const t = useTranslations('HomePage');
 
   useEffect(() => {
     if (autoFocus && inputRefs.current[0]) {
       inputRefs.current[0].focus();
     }
   }, [autoFocus]);
-
-{/*  const resetOtp = () => {
-    setLocalOtp(new Array(length).fill(''));
-    if (inputRefs.current[0]) {
-      inputRefs.current[0].focus();
-      setFieldTouched("otp", true);
-    }
-  };*/}
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (disabled) return;
@@ -88,7 +79,6 @@ const OTPInput: React.FC<OTPInputProps> = ({
         onFullFill();
       }
     }
-
 
     if (newValue.length === 1 && isValidInput(newValue, inputType)) {
       if (index < length - 1) {
@@ -136,7 +126,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
   };
 
   return (
-    <div className="flex justify-center mt-2 max-w-full box-border">
+    <div className="flex justify-center gap-x-2 mt-2 max-w-full">
       {localOtp.map((_, index) => (
         <React.Fragment key={index}>
           <input
@@ -149,16 +139,15 @@ const OTPInput: React.FC<OTPInputProps> = ({
             onBlur={handleBlur}
             onKeyDown={e => handleKeyDown(e, index)}
             ref={el => { inputRefs.current[index] = el; }}
-            className={`w-10 h-12 mx-1 text-center text-xl font-mono border rounded focus:outline-none
-              ${errors[index] ? 'border-otp-border-error animate-shake' : 'border-otp-border-light dark:border-otp-border-dark'}
-              ${disabled ? 'bg-otp-bg-disabled' : 'bg-otp-bg-light dark:bg-otp-bg-dark'}
-              ${errors[index] ? 'focus:border-otp-border-error' : 'focus:border-otp-focus-light dark:focus:border-otp-focus-dark'}
-              `}
+            className={`flex-grow w-full max-w-[4rem] h-12 text-center text-xl font-mono border rounded focus:outline-none
+              ${errors[index] ? 'border-red-500 animate-shake' : 'border-primary-border-light dark:border-primary-border-dark'}
+              ${disabled ? 'bg-secondary-background-light dark:bg-secondary-background-dark' : 'bg-primary-background-light dark:bg-primary-background-dark'}
+              ${errors[index] ? 'focus:ring-red-500 focus:border-red-500' : 'focus:ring-contrast-light focus:border-contrast-light dark:focus:ring-contrast-dark dark:focus:border-contrast-dark'}
+            `}
             disabled={disabled}
             autoComplete={autoComplete}
             autoCapitalize="none"
           />
-          {index === Math.floor(length / 2) - 1 && <div className="flex items-center justify-center mx-2 text-xs text-gray-600 dark:text-gray-400">-</div>}
         </React.Fragment>
       ))}
     </div>

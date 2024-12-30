@@ -15,8 +15,7 @@ function ensureDirectoryExistence(dirPath: string): void {
 
 // Clear existing icons in the icons directory
 function clearIconsDirectory(dirPath: string): void {
-  if (fs.existsSync(dirPath)) {
-    const files = fs.readdirSync(dirPath);
+  if (fs.existsSync(dirPath)    const files = fs.readdirSync(dirPath);
     for (const file of files) {
       const filePath = path.join(dirPath, file);
       if (fs.lstatSync(filePath).isFile()) {
@@ -37,18 +36,7 @@ async function resizeAndSave(inputFile: string, size: number): Promise<void> {
 
   try {
     const image = sharp(inputFile).resize({ width: size, height: size });
-
-    if (size === 180 || size === 192) {
-      const radius = size / 20; // Adjust the divisor for corner roundness
-      const roundedCorners = Buffer.from(
-        `<svg><rect x="0" y="0" width="${size}" height="${size}" rx="${radius}" ry="${radius}"/></svg>`,
-      );
-      await image
-        .composite([{ input: roundedCorners, blend: 'dest-in' }])
-        .toFile(outputFile);
-    } else {
       await image.toFile(outputFile);
-    }
   } catch (error) {
     console.error(
       `❌ Error creating icon ${size}x${size}.png:`,

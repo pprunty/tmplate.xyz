@@ -3,9 +3,11 @@
 import Link from 'next/link';
 import React, { useEffect, useState, useRef } from 'react';
 import Logo from '@/layout/components/Logo';
-import LoginButton from '@/modules/auth/components/LoginButton';
 import { usePathname } from 'next/navigation';
-
+import { routes } from '@/config/routes';
+import CTA from '@/layout/components/CTA';
+import SearchBar from '@/layout/components/SearchBar';
+import { LAYOUT } from '@/config';
 
 const Header: React.FC = () => {
   const pathname = usePathname();
@@ -13,35 +15,30 @@ const Header: React.FC = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isTopRowVisible, setIsTopRowVisible] = useState(true);
   const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const carouselRef = useRef<HTMLDivElement | null>(null);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
 
-const [scrollPosition, setScrollPosition] = useState(0);
+  const desktopCtaOptions = LAYOUT.desktop?.header?.cta?.options || [];
+  const mobileCtaOptions = LAYOUT.mobile?.cta?.options || [];
 
-useEffect(() => {
-  const handleBeforeUnload = () => {
-    setScrollPosition(carouselRef.current?.scrollLeft || 0);
-  };
-  window.addEventListener("beforeunload", handleBeforeUnload);
-  return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-}, []);
+  // Scroll to active item logic
+  useEffect(() => {
+    const activeItem = carouselRef.current?.querySelector(
+      `a[href="${pathname}"]`
+    );
+    if (activeItem && carouselRef.current) {
+      const carouselRect = carouselRef.current.getBoundingClientRect();
+      const itemRect = activeItem.getBoundingClientRect();
+      const offset =
+        itemRect.left - carouselRect.left - carouselRect.width / 2 + itemRect.width / 2;
 
-useEffect(() => {
-  const activeItem = carouselRef.current?.querySelector(
-    `a[href="${pathname}"]`
-  );
-  if (activeItem && carouselRef.current) {
-    const carouselRect = carouselRef.current.getBoundingClientRect();
-    const itemRect = activeItem.getBoundingClientRect();
-    const offset = itemRect.left - carouselRect.left - carouselRect.width / 2 + itemRect.width / 2;
+      carouselRef.current.scrollTo({
+        left: carouselRef.current.scrollLeft + offset,
+        behavior: 'smooth',
+      });
+    }
+  }, [pathname]);
 
-    carouselRef.current.scrollTo({
-      left: carouselRef.current.scrollLeft + offset,
-      behavior: "smooth",
-    });
-  }
-}, [pathname]);
-
-  // Determine if it's desktop or mobile based on window width (only on the client)
+  // Determine device type
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -49,162 +46,116 @@ useEffect(() => {
     }
   }, []);
 
+  // Sticky header visibility on scroll
   useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: scrollPosition,
-        behavior: "auto",
-      });
-    }
-  }, [scrollPosition]);
-
-  const mobileNavItems = [
-    { href: "/", label: "Home" },
-    { href: "/docs", label: "Docs" },
-    { href: "/blog", label: "Blog" },
-    { href: "/templates", label: "Templates" },
-    { href: "/search", label: "Search" },
-    { href: "/enterprise", label: "Enterprise" },
-  ];
-
-  useEffect(() => {
-    // If desktop, no scrolling logic applies
-    if (isDesktop) return;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > lastScrollY && currentScrollY > 50;
-      setIsScrollingDown(scrollingDown);
+      setIsScrollingDown(currentScrollY > lastScrollY && currentScrollY > 50);
       setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isDesktop]);
+  }, [lastScrollY]);
 
   useEffect(() => {
-    // If desktop, never change isTopRowVisible due to scrolling
-    if (isDesktop) {
-      setIsTopRowVisible(true);
-      return;
-    }
-
-    // Mobile logic only
-    if (showTimeoutRef.current) {
-      clearTimeout(showTimeoutRef.current);
-      showTimeoutRef.current = null;
-    }
-
     if (isScrollingDown) {
-      // If scrolling down on mobile, hide the top row
       setIsTopRowVisible(false);
     } else {
-      // If scrolling up on mobile, wait before showing the top row again
-      showTimeoutRef.current = setTimeout(() => {
-        setIsTopRowVisible(true);
-      }, 300);
+      if (showTimeoutRef.current) {
+        clearTimeout(showTimeoutRef.current);
+      }
+      showTimeoutRef.current = setTimeout(() => setIsTopRowVisible(true), 300);
     }
-
     return () => {
       if (showTimeoutRef.current) {
         clearTimeout(showTimeoutRef.current);
       }
     };
-  }, [isScrollingDown, isDesktop]);
+  }, [isScrollingDown]);
+
+  // Recursive rendering of nested routes
+  const renderRoutes = (routesToRender: typeof routes, isMobile = false) => (
+    <ul className={isMobile ? 'flex space-x-2 py-2' : 'flex space-x-2'}>
+      {routesToRender.map(({ href, label, children }) => {
+        const isActive = pathname === href;
+
+        const desktopClasses = isActive
+          ? 'text-primary-text-light dark:text-primary-text-dark font-semibold text-sm'
+          : 'text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark font-medium text-sm';
+
+        const mobileClasses = isActive
+          ? 'bg-highlight-light dark:bg-highlight-dark text-contrast-dark dark:text-contrast-light text-xs font-light'
+          : 'bg-secondary-background-light dark:bg-secondary-background-dark text-primary-text-light dark:text-primary-text-dark hover:bg-primary-active-light dark:hover:bg-primary-active-dark text-xs font-light';
+
+        return (
+          <li key={href} className={isMobile ? '' : 'relative group ml-6'}>
+            <Link
+              href={href}
+              className={`px-3 py-2 rounded-full transition-colors duration-300 ${
+                isMobile ? mobileClasses : desktopClasses
+              }`}
+            >
+              {label}
+            </Link>
+            {!isMobile && children && children.length > 0 && (
+              <ul className="absolute left-0 top-full mt-2 bg-primary-background-light dark:bg-primary-background-dark shadow-md rounded-md hidden group-hover:block">
+                {children.map((child) => (
+                  <li key={child.href}>
+                    <Link
+                      href={child.href}
+                      className="block px-4 py-2 text-sm hover:bg-secondary-active-light dark:hover:bg-secondary-active-dark"
+                    >
+                      {child.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
 
   return (
-    <nav className="bg-transparent bg-opacity-20 backdrop-blur-sm text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
-      <div className="px-2 sm:px-6 lg:px-8">
-        {/* Top row: Logo + Nav Links + Search + CTA */}
+    <nav className="bg-transparent bg-opacity-40 backdrop-blur-sm text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
+      <div className="max-w-screen-2xl mx-auto sm:px-2">
         <div
           className={`overflow-hidden ${
-            isTopRowVisible ? 'h-10 opacity-100' : 'h-0 opacity-0'
-          } transition-all duration-300 md:h-10 md:opacity-100 md:transition-none`}
+            isTopRowVisible ? 'h-12 opacity-100' : 'h-0 opacity-0'
+          } transition-all px-2 duration-300 sm:h-16 md:opacity-100 md:transition-none`}
         >
-          <div className="flex items-center justify-between h-10">
-            {/* Left side: Logo + Desktop Nav Links */}
-            <div className="flex items-center space-x-4">
-              <div className="text-lg sm:text-xl font-bold">
-                <Logo className="h-6 w-auto sm:h-8" />
+          <div className="flex items-center justify-between h-16">
+            {/* Logo and Nav Links */}
+            <div className="flex items-center space-x-2">
+              <div className="text-xl sm:text-2xl font-bold text-primary-text-light dark:text-primary-text-dark flex-shrink-0">
+                <Logo className="h-8 w-auto sm:h-12" />
               </div>
-              {/* Desktop Nav Links (visible on md and up) */}
-              <div className="hidden md:flex items-center space-x-6 md:text-base text-xs">
-                <Link href="/showcase" className="hover:text-gray-400">
-                  Showcase
-                </Link>
-                <Link href="/docs" className="hover:text-gray-400">
-                  Docs
-                </Link>
-                <Link href="/blog" className="hover:text-gray-400">
-                  Blog
-                </Link>
-                <Link href="/templates" className="hover:text-gray-400">
-                  Templates
-                </Link>
-                <Link href="/enterprise" className="hover:text-gray-400">
-                  Enterprise
-                </Link>
+              <div className="hidden md:flex items-center space-x-2">
+                {renderRoutes(routes)}
               </div>
             </div>
 
-            {/* Right side: Search + CTA (Desktop only) */}
-            <div className="hidden md:flex items-center space-x-4">
-              <input
-                type="text"
-                placeholder="Search documentation..."
-                className="px-4 py-2 rounded-md bg-gray-800 dark:bg-[#1A1A1A] text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 text-sm"
-              />
-              <div className="flex items-center space-x-2">
-                <LoginButton />
-                <Link
-                  href="/signup"
-                  className="px-3 py-2 text-sm rounded bg-transparent hover:bg-gray-800 dark:hover:bg-neutral-800 transition-colors"
-                >
-                  Sign up
-                </Link>
-              </div>
+            {/* Right side: Search + CTA */}
+            <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
+              <CTA options={desktopCtaOptions} />
             </div>
 
-            {/* Mobile: Sign in / Sign up (no search) */}
-            <div className="flex md:hidden items-center space-x-2">
-              <LoginButton
-                className="px-2 py-1 text-xs rounded bg-transparent hover:bg-gray-800 dark:hover:bg-neutral-800 transition-colors"
-              />
-              <Link
-                href="/signup"
-                className="px-2 py-1 text-xs rounded bg-transparent hover:bg-gray-800 dark:hover:bg-neutral-800 transition-colors"
-              >
-                Sign up
-              </Link>
+            {/* Mobile CTA */}
+            <div className="flex md:hidden flex-shrink-0">
+              <CTA options={mobileCtaOptions} />
             </div>
           </div>
         </div>
 
-        {/* Mobile Nav Links (Horizontal Scroll) */}
-        <div className="md:hidden py-1 transition-all duration-300">
+        {/* Mobile Nav Links */}
+        <div className="md:hidden py-2">
           <div
             ref={carouselRef}
-            className="overflow-x-auto whitespace-nowrap scrollbar-hide"
+            className="overflow-x-auto px-1 whitespace-nowrap scrollbar-hide"
           >
-            <div className="flex space-x-2 py-2">
-              {mobileNavItems.map(({ href, label }) => {
-                const isActive = pathname === href;
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={`px-4 py-2 rounded-full text-xs font-light transition-colors duration-300
-                      ${
-                        isActive
-                          ? 'bg-[#DC70FF] dark:bg-[#DC70FF] dark:text-black text-white'
-                          : 'bg-gray-200 text-gray-900 dark:bg-[#222] dark:text-white hover:bg-gray-300 dark:hover:bg-neutral-700'
-                      }`}
-                  >
-                    {label}
-                  </Link>
-                );
-              })}
-            </div>
+            {renderRoutes(routes, true)}
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Layout from '@/layout';
 import { Suspense } from 'react';
 import { themeEffect } from '@/modules/common/templates/ThemeSwitcher/theme-effect';
-import { SEO, PRODUCTION_URL, SITE_URL } from '@/config';
+import { SEO, PRODUCTION_URL, SITE_URL, LAYOUT } from '@/config';
 import { Inter } from 'next/font/google';
 import type { Viewport } from 'next';
 import { doge } from './doge';
@@ -108,7 +108,7 @@ export default async function RootLayout({
         <SessionProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
               <Suspense fallback={null}>
-                <Layout type="SidebarMenu" mobile="BottomBar">
+                <Layout desktop={LAYOUT.desktop.type} mobile={LAYOUT.mobile.type} userRole={"admin"}>
                 {children}
                 </Layout>
               </Suspense>

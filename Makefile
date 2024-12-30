@@ -10,7 +10,7 @@ all: dev
 # Development server
 .PHONY: dev
 dev:
-	npm run dev --turbo
+	npm run dev
 
 # Build the project
 .PHONY: build

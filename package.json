@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next lint --fix && ts-node scripts/pwa.ts && next build",
     "start": "next start",
     "lint": "next lint",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
     "@vercel/analytics": "^1.4.1",
+    "classnames": "^2.5.1",
     "formik": "^2.4.6",
     "lodash": "^4.17.21",
     "lucide-react": "^0.462.0",

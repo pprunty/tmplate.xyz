@@ -4,18 +4,28 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { bottomBarRoutes } from '@/config/routes';
+import { getRoutesForLayout } from '@/utils/routeUtils';
 import Header from '@/layout/components/Header';
 import Footer from '@/layout/components/Footer';
 
 interface BottomNavBarProps {
   children: React.ReactNode;
-  showFooter?: boolean; // Add showFooter as an optional prop
+  layout: string; // Pass the layout as a prop
+  userRole?: string; // Optionally pass the user role
+  variation?: 'blur' | 'linear-opacity'; // Add variation prop
 }
 
-const BottomNavBar: React.FC<BottomNavBarProps> = ({ children, showFooter = false }) => {
+const BottomNavBar: React.FC<BottomNavBarProps> = ({
+  children,
+  layout,
+  userRole,
+  variation = 'blur', // Default to "blur"
+}) => {
   const pathname = usePathname();
   const t = useTranslations('Layout');
+
+  // Get filtered routes for the current layout and role
+  const bottomBarRoutes = getRoutesForLayout(layout, userRole);
 
   // Header height for mobile devices
   const mobileHeaderHeight = '7em'; // 56px (h-14 in Tailwind)
@@ -32,9 +42,22 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ children, showFooter = fals
       >
         {children}
       </main>
-      {showFooter && <Footer />}
+      <Footer />
 
-      <nav className="block md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 dark:border-[#333] bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-55 backdrop-blur-sm text-black dark:text-gray-300">
+      <nav
+        className={`block md:hidden fixed bottom-0 left-0 right-0 z-50 ${
+          variation === 'blur'
+            ? 'border-t border-primary-border-light dark:border-primary-border-dark backdrop-blur-sm'
+            : '' // No border for linear-opacity
+        }`}
+        style={
+          variation === 'linear-opacity'
+            ? {
+                background: 'linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))', // Linear opacity effect
+              }
+            : undefined
+        }
+      >
         <ul className="flex justify-around">
           {bottomBarRoutes.map(({ href, translationKey, icon: Icon }) => {
             const isActive = pathname === href;
@@ -44,16 +67,18 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ children, showFooter = fals
                   href={href}
                   className={`flex flex-col items-center py-2 transition-colors duration-300 ease-in-out ${
                     isActive
-                      ? 'text-black dark:text-white'
-                      : 'text-gray-500 dark:text-gray-400'
+                      ? 'text-contrast-light dark:text-contrast-dark'
+                      : 'text-secondary-text-light dark:text-secondary-text-dark'
                   }`}
                 >
-                  <Icon
-                    size={24}
-                    className={`transform transition-transform transition-colors duration-500 ease-in-out ${
-                      isActive ? 'scale-110' : 'scale-100'
-                    }`}
-                  />
+                  {Icon && (
+                    <Icon
+                      size={24}
+                      className={`transform transition-transform duration-500 ease-in-out ${
+                        isActive ? 'scale-110' : 'scale-100'
+                      }`}
+                    />
+                  )}
                   <span className="text-[11px] pt-1">{t(translationKey)}</span>
                 </Link>
               </li>

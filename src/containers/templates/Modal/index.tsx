@@ -7,8 +7,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'full'; // Define optional size prop
-  title?: string; // Optional title prop
+  size?: 'sm' | 'md' | 'lg' | 'full';
+  mobileSize?: 'sm' | 'md' | 'lg' | 'full';
+  title?: string;
+  variation?: 'blur' | 'backdrop';
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -16,7 +18,9 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   size = 'full',
+  mobileSize,
   title,
+  variation = 'backdrop',
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -31,7 +35,6 @@ const Modal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Determine modal width based on size prop
   const sizeClasses = {
     sm: 'max-w-sm',
     md: 'max-w-md',
@@ -39,32 +42,39 @@ const Modal: React.FC<ModalProps> = ({
     full: 'max-w-full',
   };
 
+  const modalSizeClass = mobileSize
+    ? `${sizeClasses[size]}`
+    : sizeClasses[size];
+
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] p-6 flex items-center justify-center"
+      className="fixed inset-0 z-[9999] p-1 sm:p-6 flex items-center justify-center"
       onClick={onClose}
     >
       <div
-        className="absolute inset-0 bg-black bg-opacity-50"
+        className={`absolute inset-0 ${
+          variation === 'blur'
+            ? 'bg-[#131313] bg-opacity-5 backdrop-blur-sm'
+            : 'bg-black bg-opacity-50'
+        }`}
         aria-hidden="true"
       ></div>
       <div
-        className={`w-full ${sizeClasses[size]} mx-auto px-6 relative`}
+        className={`w-full ${modalSizeClass} px-6 relative`}
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className={`bg-white dark:bg-[#0D0D0D] rounded-lg shadow-xl border dark:border-[#252525] transition-transform duration-300 ${
+          className={`bg-primary-background-light dark:bg-primary-background-dark rounded-lg shadow-xl border border-primary-border-light dark:border-primary-border-dark transition-transform duration-300 ${
             isOpen ? 'animate-modalShow' : ''
           }`}
         >
-          {/* Conditionally render the title and close button if title is provided */}
           {title && (
-            <div className="p-4 border-b border-gray-200 dark:border-[#252525] flex items-center justify-between">
-              <h2 className="text-2xl font-semibold dark:text-white">
+            <div className="p-4 border-b border-primary-border-light dark:border-primary-border-dark flex items-center justify-between">
+              <h2 className="text-2xl font-semibold text-primary-text-light dark:text-primary-text-dark">
                 {title}
               </h2>
               <button
-                className="p-2 rounded-lg dark:border-[#313131] bg-[#fff] dark:bg-[#0D0D0D] hover:bg-gray-300 dark:hover:bg-[#313131] transition-opacity"
+                className="p-2 rounded-lg bg-primary-background-light dark:bg-primary-background-dark hover:bg-primary-background-hover-light dark:hover:bg-primary-background-hover-dark active:bg-primary-background-active-light dark:active:bg-primary-background-active-dark transition-opacity"
                 onClick={onClose}
                 aria-label="Close"
               >
@@ -93,15 +103,12 @@ const Modal: React.FC<ModalProps> = ({
               </button>
             </div>
           )}
-
-          {/* Modal content */}
           <div>{children}</div>
         </div>
       </div>
     </div>
   );
 
-  // Only render in the browser
   if (typeof window === 'undefined') {
     return null;
   } else {

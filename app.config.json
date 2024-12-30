@@ -1,23 +1,67 @@
 {
   "productionUrl": "https://tmplate.xyz",
   "layout": {
-    "mobile": "header_and_footer",
-    "desktop": "bottom_bar"
+    "show_branding": true,
+    "show_footer": true,
+    "show_cta": true,
+    "desktop": {
+      "show_cta": true,
+      "show_footer": true,
+      "show_branding": true,
+      "type": "HeaderAndFooter",
+      "header": {
+        "variation": "blur",
+        "cta": {
+          "options": ["auth", "notifications", "shopping_cart"]
+        }
+      },
+      "branding": {
+        "show_brand_name": false
+      }
+    },
+    "mobile": {
+      "type": "BottomBar",
+      "header": {
+        "variation": "blur"
+      },
+      "cta": {
+        "options": ["auth", "search", "notifications"]
+      },
+      "show_footer": true,
+      "show_branding": true
+    },
+    "header": {
+      "variation": "linear-opacity"
+    },
+    "cta": {
+      "options": ["auth", "notifications", "shopping_cart"]
+    },
+    "footer": {
+      "show_social_icons": true,
+      "newsletter": true
+    },
+    "branding": {
+      "logo_svg_path": "/icon.svg",
+      "show_brand_name": false,
+      "url": "/",
+      "brand_name": {
+        "name": "[tmp]",
+        "font_family": "monospace",
+        "font_weight": "200"
+      }
+    }
   },
   "routing": {
-    "primary": {
-    },
-    "secondary": {
-    },
-    "admin": {
-    }
+    "primary": {},
+    "secondary": {},
+    "admin": {}
   },
   "analytics": {
     "gaMeasurementId": "",
     "useVercelAnalytics": true
   },
   "seo": {
-    "title": "tmplate.xyz",
+    "title": "tmplate.xyz — Pure Web Design",
     "description": "Pure Web Design",
     "publisher": {
       "name": "Patrick Prunty",
@@ -36,17 +80,18 @@
       "minimalistic"
     ],
     "socials": {
-      "twitter": "",
+      "twitter": "https://patrickprunty.com",
       "strava": "https://www.strava.com/athletes/72636452",
       "github": "https://github.com/pprunty/blog.v2",
-      "linkedin": "https://www.linkedin.com/in/patrickprunty/",
+      "linkedin": "",
       "reddit": "",
-      "tiktok": "",
-      "instagram": "https://www.instagram.com/pprunty97/",
-      "youtube": "",
-      "email": "patrickprunty.business@gmail.com"
+      "tiktok": "https://patrickprunty.com",
+      "instagram": "",
+      "youtube": "https://patrickprunty.com",
+      "email": ""
     },
     "blog": {
+      "posts_path": "",
       "is_blog_user_configured": true
     }
   }

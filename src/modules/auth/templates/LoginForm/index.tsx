@@ -1,22 +1,54 @@
 // app/login/page.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Form, Field, FormikProps } from 'formik';
 
 import Button from '@/modules/common/components/Button';
 import Input from '@/modules/common/components/Input';
 import Separator from '@/modules/common/components/Separator';
 import OTPInput from '@/modules/common/components/OTPInput';
+import { ExternalLink } from 'lucide-react';
 
 const LoginForm: React.FC = () => {
   const [showOTP, setShowOTP] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (showEmailInput && emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, [showEmailInput]);
+
+  const PolicyText = () => (
+    <div className="text-center text-[11px] mt-6 text-secondary-text-light dark:text-secondary-text-dark max-w-[90%] sm:max-w-[95%] mx-auto">
+      By continuing, you acknowledge that you understand and agree to the{' '}
+      <a
+        href="/terms"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark inline-flex items-center space-x-1 transition-colors duration-200"
+      >
+        <span>Terms and Conditions</span>
+        <ExternalLink className="w-3 h-3" />
+      </a>{' '}
+      and{' '}
+      <a
+        href="/privacy"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark inline-flex items-center space-x-1 transition-colors duration-200"
+      >
+        <span>Privacy Policy</span>
+        <ExternalLink className="h-3 w-3" />
+      </a>
+    </div>
+  );
 
   return (
     <div className="flex items-center justify-center p-4">
       <div className="w-full max-w-sm p-6">
-        {/* Buttons Container */}
         <div className="space-y-4">
           {/* Continue with Google Button */}
           <Button
@@ -72,95 +104,151 @@ const LoginForm: React.FC = () => {
             Continue with Apple
           </Button>
 
-          {/* Continue with Email Button (Mobile Only) */}
+          {/* Desktop: Always show email input with separator */}
+          <div className="hidden sm:block">
+            <Separator />
+            <div className="mt-4">
+              <label
+                htmlFor="email"
+                className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+              >
+                Email
+              </label>
+              <Formik
+                initialValues={{ email: '', otp: '' }}
+                onSubmit={(values) => {
+                  console.log('Form submitted:', values);
+                  setShowOTP(true);
+                }}
+              >
+                {({ isSubmitting, errors, touched }: FormikProps<{ email: string; otp: string }>) => (
+                  <Form>
+                    <Field
+                      name="email"
+                      id="email"
+                      type="email"
+                      as={Input}
+                      placeholder="Enter your email address..."
+                      className="py-[10px]"
+                      required
+                      autoFocus={true}
+                      disabled={showOTP}
+                    />
+                    {errors.email && touched.email && (
+                      <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+                    )}
+                    {showOTP && (
+                      <div className="mt-4">
+                        <label
+                          htmlFor="otp"
+                className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+                        >
+                          Login code
+                        </label>
+                        <OTPInput
+                          id="otp"
+                          name="otp"
+                          length={6}
+                          onChange={({ target: { value } }) => console.log('OTP Entered:', value)}
+                          onBlur={() => console.log('OTP Field Blurred')}
+                        />
+                      </div>
+                    )}
+                    <div className="mt-6">
+                      <Button type="submit"
+                      variation="submit"
+                      disabled={isSubmitting}>
+                        {showOTP ? 'Continue with login code' : 'Continue'}
+                      </Button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          </div>
+
+          {/* Mobile: Show "Continue with Email" button */}
           <div className="block sm:hidden">
             <Button
               icon={
-               <svg
-                      className="w-5 h-5"
-                      viewBox="0 0 493.497 493.497"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      aria-label="Email Icon"
-                    >
-                      <path d="M444.556,85.218H48.942C21.954,85.218,0,107.171,0,134.16v225.177c0,26.988,21.954,48.942,48.942,48.942h395.613  c26.988,0,48.941-21.954,48.941-48.942V134.16C493.497,107.171,471.544,85.218,444.556,85.218z M460.87,134.16v225.177  c0,2.574-0.725,4.924-1.793,7.09L343.74,251.081l117.097-117.097C460.837,134.049,460.87,134.096,460.87,134.16z M32.628,359.336  V134.16c0-0.064,0.033-0.11,0.033-0.175l117.097,117.097L34.413,366.426C33.353,364.26,32.628,361.911,32.628,359.336z   M251.784,296.902c-2.692,2.691-7.378,2.691-10.07,0L62.667,117.846h368.172L251.784,296.902z M172.827,274.152l45.818,45.819  c7.512,7.511,17.493,11.645,28.104,11.645c10.61,0,20.592-4.134,28.104-11.645l45.82-45.819l101.49,101.499H71.327L172.827,274.152z  "></path>
-                    </svg>
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 493.497 493.497"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  aria-label="Email Icon"
+                >
+                  <path d="M444.556,85.218H48.942C21.954,85.218,0,107.171,0,134.16v225.177c0,26.988,21.954,48.942,48.942,48.942h395.613  c26.988,0,48.941-21.954,48.941-48.942V134.16C493.497,107.171,471.544,85.218,444.556,85.218z M460.87,134.16v225.177  c0,2.574-0.725,4.924-1.793,7.09L343.74,251.081l117.097-117.097C460.837,134.049,460.87,134.096,460.87,134.16z M32.628,359.336  V134.16c0-0.064,0.033-0.11,0.033-0.175l117.097,117.097L34.413,366.426C33.353,364.26,32.628,361.911,32.628,359.336z   M251.784,296.902c-2.692,2.691-7.378,2.691-10.07,0L62.667,117.846h368.172L251.784,296.902z M172.827,274.152l45.818,45.819  c7.512,7.511,17.493,11.645,28.104,11.645c10.61,0,20.592-4.134,28.104-11.645l45.82-45.819l101.49,101.499H71.327L172.827,274.152z  "></path>
+                </svg>
               }
               onClick={() => setShowEmailInput(true)}
             >
               Continue with Email
             </Button>
+            {showEmailInput && (
+              <Formik
+                initialValues={{ email: '', otp: '' }}
+                onSubmit={(values) => {
+                  console.log('Form submitted:', values);
+                  setShowOTP(true);
+                }}
+              >
+                {({ isSubmitting, errors, touched }: FormikProps<{ email: string; otp: string }>) => (
+                  <Form>
+                    <div className="mt-4">
+                      <label
+                        htmlFor="email"
+                className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+                      >
+                        Email
+                      </label>
+                      <Field
+                        name="email"
+                        id="email"
+                        type="email"
+                        as={Input}
+                        placeholder="Enter your email address..."
+                        className="py-[10px]"
+                        required
+                        autoFocus={true}
+                        disabled={showOTP}
+                      />
+                      {errors.email && touched.email && (
+                        <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+                      )}
+                      {showOTP && (
+                        <div className="mt-4">
+                          <label
+                            htmlFor="otp"
+                className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+                          >
+                            Login code
+                          </label>
+                          <OTPInput
+                            id="otp"
+                            name="otp"
+                            length={6}
+                            onChange={({ target: { value } }) => console.log('OTP Entered:', value)}
+                            onBlur={() => console.log('OTP Field Blurred')}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-6">
+                      <Button type="submit"
+                      variation="submit"
+                       disabled={isSubmitting}>
+                        {showOTP ? 'Continue with login code' : 'Continue'}
+                      </Button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            )}
           </div>
         </div>
 
-        {/* Separator */}
-        <Separator />
-
-<Formik
-  initialValues={{ email: '', otp: '' }}
-  onSubmit={(values) => {
-    console.log('Form submitted:', values);
-    if (!showOTP) {
-      setShowOTP(true);
-    } else {
-      console.log('Verify OTP');
-    }
-  }}
->
-  {({
-    isSubmitting,
-    setFieldValue,
-    setFieldTouched,
-    errors,
-    touched,
-  }: FormikProps<{ email: string; otp: string }>) => (
-    <Form>
-      {/* Email Input */}
-      {showEmailInput && (
-        <div className="mt-4">
-          <Field
-            name="email"
-            type="email"
-            as={Input}
-            placeholder="Email"
-            required
-          />
-          {errors.email && touched.email && (
-            <div className="text-red-500 text-sm mt-1">{errors.email}</div>
-          )}
-        </div>
-      )}
-
-      {/* OTP Input */}
-      {showOTP && (
-        <div className="mt-4">
-          <OTPInput
-            id="otp"
-            name="otp"
-            length={6}
-            onChange={({ target: { value } }) => setFieldValue('otp', value)} // Match the expected type
-            onBlur={() => setFieldTouched('otp', true)}
-            onFullFill={() => console.log('OTP Complete!')}
-            setFieldError={(field, message) => console.error(`${field}: ${message}`)}
-            setFieldTouched={setFieldTouched}
-            disabled={isSubmitting}
-          />
-          {errors.otp && touched.otp && (
-            <div className="text-red-500 text-sm mt-1">{errors.otp}</div>
-          )}
-        </div>
-      )}
-
-      {/* Submit Button */}
-      <div className="mt-6">
-        <Button type="submit" disabled={isSubmitting}>
-          {showOTP ? 'Verify OTP' : 'Send OTP'}
-        </Button>
-      </div>
-    </Form>
-  )}
-</Formik>
-
+        <PolicyText />
       </div>
     </div>
   );

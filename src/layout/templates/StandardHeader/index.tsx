@@ -2,11 +2,11 @@ import React from 'react';
 import Header from '@/layout/components/Header';
 import Footer from '@/layout/components/Footer';
 
-interface HeaderAndFooterProps {
+interface StandardHeaderProps {
   children: React.ReactNode; // Explicitly type the children prop
 }
 
-export default function HeaderAndFooter({ children }: HeaderAndFooterProps) {
+export default function StandardHeader({ children }: StandardHeaderProps) {
   return (
     <div>
       <Header />
