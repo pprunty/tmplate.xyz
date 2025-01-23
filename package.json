@@ -18,6 +18,7 @@
     "@vercel/analytics": "^1.4.1",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
+    "hamburger-react": "^2.5.2",
     "lodash": "^4.17.21",
     "lucide-react": "^0.462.0",
     "next": "15.0.3",
@@ -26,6 +27,7 @@
     "next-scroll-restorer": "^0.9.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-mobile-app-button": "^1.2.18",
     "tailwind-scrollbar-hide": "^1.1.7",
     "ts-node": "^10.9.2"
   },

@@ -1,5 +1,5 @@
-import { generatePwaIcons } from '../src/utils/generateIcons'; // Adjust the path as needed
-import { updateManifest } from '../src/utils/updateManifest'; // Adjust the path to match your project structure
+import { generatePwaIcons } from '../src/utils/pwa/generateIcons'; // Adjust the path as needed
+import { updateManifest } from '../src/utils/pwa/updateManifest'; // Adjust the path to match your project structure
 
 (async () => {
   try {

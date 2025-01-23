@@ -1,34 +1,34 @@
+// app/layout.tsx (a server component)
 import "./globals.css";
 import type { Metadata } from "next";
-import Layout from '@/layout';
-import { Suspense } from 'react';
-import { themeEffect } from '@/modules/common/templates/ThemeSwitcher/theme-effect';
-import { SEO, PRODUCTION_URL, SITE_URL, LAYOUT } from '@/config';
-import { Inter } from 'next/font/google';
-import type { Viewport } from 'next';
-import { doge } from './doge';
+import { headers } from "next/headers";
+import Layout from "@/lib/layout";
+import { Suspense } from "react";
+import { themeEffect } from "@/lib/widgets/common/templates/ThemeSwitcher/theme-effect";
+import { SEO, PRODUCTION_URL, SITE_URL, LAYOUT } from "@/config";
+import { Inter } from "next/font/google";
+import type { Viewport } from "next";
+import { doge } from "./doge";
 import { SessionProvider } from "next-auth/react";
-import { getLocale, getMessages } from 'next-intl/server';
-import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
+// You can keep your "viewport" and "metadata" exports the same:
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   userScalable: true,
-  themeColor: 'transparent',
+  themeColor: "transparent",
 };
 
-// Define metadata
 export const metadata: Metadata = {
   title: `${SEO.title}`,
   description: `${SEO.description}`,
-  keywords: [
-    ...SEO.keywords // Spread the existing keywords array
-  ],
+  keywords: [...SEO.keywords],
   manifest:
-    process.env.NODE_ENV === 'production'
-      ? '/manifest.prod.json'
-      : '/manifest.json',
+    process.env.NODE_ENV === "production"
+      ? "/manifest.prod.json"
+      : "/manifest.json",
   openGraph: {
     title: `${SEO.title}`,
     description: `${SEO.description}`,
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
         alt: `${SEO.title}`,
       },
     ],
-    type: 'website',
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     site: `${SEO.socials.twitter}`,
     creator: `${SEO.socials.twitter}`,
     images: [
@@ -54,30 +54,39 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [{ url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' }],
-    apple: [{ url: '/icons/180x180.png', sizes: '180x180' }],
+    icon: [{ url: "/icons/192x192.png", sizes: "192x192", type: "image/png" }],
+    apple: [{ url: "/icons/180x180.png", sizes: "180x180" }],
   },
   metadataBase: new URL(SITE_URL),
 };
 
 const inter = Inter({
-  subsets: ['latin'], // Only include necessary subsets
-  weight: ['300', '400', '500', '600', '700'], // Specify required font weights
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
+// This is still an async server component, so we can fetch translations or do other async tasks
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   const locale = await getLocale();
   const messages = await getMessages();
 
+  // ─────────────────────────────────────────────────────────────────────────────
+  // 1) Detect if the user is on mobile based on "user-agent" from headers()
+  // ─────────────────────────────────────────────────────────────────────────────
+  const h = await headers();
+  const userAgent =  h.get("user-agent") || "";
+  const isMobile = /mobile/i.test(userAgent);
+
+  // Build your JSON-LD
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Website',
+    "@context": "https://schema.org",
+    "@type": "Website",
     name: SEO.title,
-    description: `${SEO.description}`,
+    description: SEO.description,
     url: SITE_URL,
     sameAs: [
       SEO.socials.twitter,
@@ -107,11 +116,17 @@ export default async function RootLayout({
       <body className={`${inter.className} antialiased dark:text-gray-100`}>
         <SessionProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-              <Suspense fallback={null}>
-                <Layout desktop={LAYOUT.desktop.type} mobile={LAYOUT.mobile.type} userRole={"admin"}>
+            <Suspense fallback={null}>
+              {/* 2) Pass isMobile into your Layout so it can decide which layout to use */}
+              <Layout
+                desktop={LAYOUT.desktop.type}
+                mobile={LAYOUT.mobile.type}
+                userRole="admin"
+                isMobile={isMobile}
+              >
                 {children}
-                </Layout>
-              </Suspense>
+              </Layout>
+            </Suspense>
           </NextIntlClientProvider>
         </SessionProvider>
       </body>
