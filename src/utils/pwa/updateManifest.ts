@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { SITE_URL, SEO } from '../../config';
+import config from '../../app/config';
 
 // Utility function to ensure a trailing slash for URLs
 const ensureTrailingSlash = (url: string): string =>
@@ -17,9 +17,9 @@ const devManifestPath = path.resolve(process.cwd(), 'public', 'manifest.json');
 export async function updateManifest(): Promise<void> {
   try {
     // Retrieve configuration data
-    const websiteURL = ensureTrailingSlash(SITE_URL);
-    const fullName = SEO.title;
-    const profileDescription = SEO.description;
+    const websiteURL = ensureTrailingSlash(config.productionUrl);
+    const fullName = config.seo.title;
+    const profileDescription = config.seo.description;
 
     // Update production manifest
     const prodManifestContent = await fs.readFile(prodManifestPath, 'utf8');

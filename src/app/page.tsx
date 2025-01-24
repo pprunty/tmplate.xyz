@@ -1,163 +1,94 @@
-'use client';
-
-import React, { useState } from "react";
-import Image from "next/image";
-import LocaleSwitcher from '@/lib/widgets/common/templates/LocaleSwitcher';
-import ThemeSwitcher from '@/lib/widgets/common/templates/ThemeSwitcher';
-import Carousel from "@/lib/composition/views/Carousel";
-import Grid from "@/lib/composition/views/Grid";
-import Modal from "@/lib/composition/views/Modal";
+import { ThemeSwitcher } from "./_components/theme-switcher";
+import LayoutToggle from "./_components/layout-toggle";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center w-full max-w-screen-xl mx-auto min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <Image
-        className="dark:invert"
-        src="/next.svg"
-        alt="Next.js logo"
-        width={180}
-        height={38}
-        priority
-      />
-      <LocaleSwitcher />
-      <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-        <li className="mb-2">
-          Get started by editing{" "}
-          <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-            src/app/page.tsx
-          </code>
-          .
-        </li>
-        <li>Save and see your changes instantly.</li>
-      </ol>
+    <div className="space-y-8">
+      {/* Page Heading */}
+      <section>
+        <h1 className="text-4xl font-bold mb-2">Welcome to My Website</h1>
+        <p className="text-lg text-gray-700 dark:text-gray-300">
+          This is a basic layout using Next.js 13, Tailwind CSS, and React components.
+        </p>
+      </section>
 
-      {/* Carousel Showcase */}
-      <h3 className="text-lg font-bold mb-4">Carousel</h3>
-      <Carousel
-        items={[
-          <div
-            key="widget-1" // Added key
-            className="bg-red-500 h-40 flex items-center justify-center text-white font-bold"
-          >
-            Widget 1
-          </div>,
-          <div
-            key="widget-2" // Added key
-            className="bg-blue-500 h-40 flex items-center justify-center text-white font-bold"
-          >
-            Widget 2
-          </div>,
-          <div
-            key="widget-3" // Added key
-            className="bg-green-500 h-40 flex items-center justify-center text-white font-bold"
-          >
-            Widget 3
-          </div>,
-        ]}
-      />
+ <section>
+        <LayoutToggle />
+      </section>
 
-      {/* Grid Showcase */}
-      <h3 className="text-lg font-bold mb-4">Grid</h3>
-      <Grid columns={2} gap="gap-4">
-        <div
-          key="grid-widget-1" // Added key
-          className="bg-red-500 h-20 flex items-center justify-center text-white font-bold"
-        >
-          Widget 1
-        </div>
-        <div
-          key="grid-widget-2" // Added key
-          className="bg-blue-500 h-20 flex items-center justify-center text-white font-bold"
-        >
-          Widget 2
-        </div>
-        <div
-          key="grid-widget-3" // Added key
-          className="bg-green-500 h-20 flex items-center justify-center text-white font-bold"
-        >
-          Widget 3
-        </div>
-      </Grid>
-
-      {/* Modal Showcase */}
-      <h3 className="text-lg font-bold mb-4">Modal</h3>
-      <button
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        onClick={() => setIsModalOpen(true)}
-      >
-        Open Modal
-      </button>
-      <Modal
-        isOpen={isModalOpen}
-        size="lg"
-        onClose={() => setIsModalOpen(false)}
-      >
-        <div className="flex flex-col gap-4 p-6">
-          <div
-            key="modal-widget-1" // Added key
-            className="bg-red-500 p-4 rounded-lg text-white font-bold"
-          >
-            Widget 1
-          </div>
-          <div
-            key="modal-widget-2" // Added key
-            className="bg-blue-500 p-4 rounded-lg text-white font-bold"
-          >
-            Widget 2
-          </div>
-        </div>
-      </Modal>
-
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      {/* Theme Switcher */}
+      <section>
         <ThemeSwitcher />
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* A few paragraphs of text to show scrolling */}
+      <section className="space-y-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam,
+          vitae. Praesentium corporis doloremque, perferendis nobis omnis
+          reiciendis porro dolorem quia laudantium pariatur ratione nemo
+          obcaecati deserunt rerum aliquid. Ad, cumque?
+        </p>
+        <p>
+          Quasi labore inventore culpa officiis? Unde iure architecto
+          consequuntur, illo quos provident soluta quidem mollitia. Mollitia
+          veritatis quas fugit quam, quis ex. Corporis rem voluptatibus sunt
+          amet iure quos laborum?
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo
+          possimus repellendus, unde impedit eaque earum? Ad, nobis veniam,
+          ex quibusdam perferendis quidem autem vero quasi vel odit
+          dignissimos! Dolorem, dolore.
+        </p>
+      </section>
+
+      {/* Example grid section (cards) */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Featured Cards</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article className="bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow">
+            <h3 className="text-lg font-medium mb-2">Card One</h3>
+            <p className="text-sm">
+              This is some placeholder content for the first card. Lorem ipsum dolor sit amet.
+            </p>
+          </article>
+          <article className="bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow">
+            <h3 className="text-lg font-medium mb-2">Card Two</h3>
+            <p className="text-sm">
+              Another example card. Add more text or images to see how it all fits.
+            </p>
+          </article>
+          <article className="bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow">
+            <h3 className="text-lg font-medium mb-2">Card Three</h3>
+            <p className="text-sm">
+              Here’s the third card for demonstration. It’s styled similarly for consistency.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      {/* Another paragraph block to force more scrolling */}
+      <section className="space-y-4">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+          pharetra fermentum consectetur. Vivamus vulputate tristique tortor,
+          vitae molestie augue semper nec. Cras fermentum interdum tortor
+          quis feugiat. Nam ut tortor a ante semper auctor vel vel nibh.
+        </p>
+        <p>
+          Praesent imperdiet, neque vel laoreet viverra, velit ligula dictum
+          magna, sit amet interdum enim quam sed lorem. Etiam consectetur,
+          justo id volutpat suscipit, mauris nulla commodo enim, vitae
+          gravida purus nisi at diam.
+        </p>
+        <p>
+          Integer consequat lorem vitae dolor tristique, a fermentum tellus
+          vestibulum. Vivamus porta finibus ullamcorper. Fusce in purus sem.
+          Mauris neque libero, blandit eget ligula sed, imperdiet volutpat
+          ipsum.
+        </p>
+      </section>
     </div>
   );
 }

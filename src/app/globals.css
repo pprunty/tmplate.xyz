@@ -3,27 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-
   :root {
     /* Font setup */
     font-family: "Inter", sans-serif;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
     color-scheme: light;
 
     @apply bg-[#fcfcfc];
-    @apply text-[#000];
-  }
-
-  img {
-    height: inherit !important;
+    @apply text-[#1c1c1c];
   }
 
   /* Dark mode settings */
   :root.dark {
     color-scheme: dark;
     /* You can change theme dark color here to #131313 for example, remember to change it in theme-effect.ts too */
-    @apply bg-[#000];
+    @apply bg-[#1c1c1c];
     @apply text-[#fcfcfc];
   }
 
@@ -32,18 +26,6 @@
     transition-duration: 0ms !important;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px) scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-
   /* Optimize font rendering */
   @supports (font-variation-settings: normal) {
     :root {
@@ -51,43 +33,50 @@
     }
   }
 
-  /* Customize scrollbar for WebKit browsers (Chrome, Safari) */
-  /* Light mode scrollbar styles */
+  /* Customize scrollbar for WebKit browsers */
   ::-webkit-scrollbar {
-    width: 4px; /* Make scrollbar narrower */
-    height: 4px;
+    width: 6px;
+    height: 6px;
   }
-
-
   ::-webkit-scrollbar-thumb {
-    background-color: #000; /* Black thumb */
+    background-color: #1c1c1c;
     border-radius: 0px;
   }
-
-  /* Dark mode scrollbar styles */
   .dark ::-webkit-scrollbar-track {
-    background: #1c1c1c; /* Dark gray track */
+    background: #1c1c1c;
   }
-
   .dark ::-webkit-scrollbar-thumb {
-    background-color: #ccc; /* Light gray thumb */
+    background-color: #ccc;
   }
 
   /* Customize scrollbar for Firefox */
-  /* Light mode */
+  * {
+    scrollbar-width: thin; /* Make scrollbar narrower */
+  }
+
+  /* Various rendering tweaks */
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+
+  img {
+    height: inherit !important;
+  }
 
   pre {
     margin: 1rem 0 !important;
   }
 
-    blockquote, dl, dd, hr, pre {
-        margin: 1rem 0 !important;
-    }
-
   /* Apply global styles to pre and code tags */
   pre code {
     font-family: monospace;
-    font-size: 14px; /* Ensure code within pre has smaller font */
+    font-size: 14px;
   }
 
   code {
@@ -100,46 +89,11 @@
   }
 
   :root.dark code {
-    background-color: #1c1c1c; /* Dark mode background for inline code */
+    background-color: #2b2b2b; /* Dark mode background for inline code */
   }
-
-  .toc {
-    font-family: Arial, sans-serif; /* Example font */
-    color: #4a5568; /* Example text color */
-  }
-
-  .toc a {
-    transition: color 0.3s ease;
-  }
-
-  .toc a:hover {
-    color: #2b6cb0; /* Example hover color */
-  }
-
-/* Hide scrollbars for iOS and all devices */
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  overflow: hidden;
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
-}
-
-/* Ensures horizontal overflow is hidden on iOS */
-.hide-scrollbar {
-  overflow-x: hidden !important;
-}
-
-}
-
-/* Initial state */
-[data-animate-image] .image-animate {
-  opacity: 0;
-}
-
-/* Initial state */
+/* Initial state for image animations */
 [data-animate-image] .image-animate {
   opacity: 0;
   will-change: transform, opacity;
