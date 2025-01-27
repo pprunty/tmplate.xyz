@@ -40,7 +40,7 @@ export default function Footer() {
         marginTop: '5vw',
       }}
     >
-      <div className="max-w-screen-xl sm:px-8 w-full sm:px-6 py-10">
+      <div className="max-w-screen-xl p-6 sm:px-8 w-full sm:px-6 py-10">
         <div
           className="
             grid
