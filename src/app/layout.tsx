@@ -63,8 +63,9 @@ export const metadata: Metadata = {
 };
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 // Layout component

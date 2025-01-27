@@ -4,7 +4,7 @@ export interface Route {
   href: string;
   translationKey: string;
   label: string;
-  icon?: React.ComponentType;
+icon?: React.ComponentType<{ className?: string; size?: number } & React.SVGProps<SVGSVGElement>>;
   role?: string[]; // Roles allowed to view this route (e.g., ['admin', 'user'])
   showInLayouts?: string[]; // Layouts where this route is visible (e.g., ['stacked', 'admin'])
   children?: Route[]; // Sub-routes for nested navigation

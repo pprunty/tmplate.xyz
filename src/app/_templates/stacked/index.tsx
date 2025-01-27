@@ -7,7 +7,7 @@ interface StackedLayoutProps {
   children: React.ReactNode;
 }
 
-export default async function StackedLayout({ children }: LayoutProps) {
+export default async function StackedLayout({ children }: StackedLayoutProps) {
   const requestHeaders = await headers();
   const deviceHeader = requestHeaders.get("x-mobile-device");
   const isMobile = deviceHeader === "true";

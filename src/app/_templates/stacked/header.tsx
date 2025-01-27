@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import Logo from "@/app/_layout/logo";
-import CTA from "@/app/_layout/cta";
-import { routes } from "@/config/routes";
+import CTA, { CTAOption } from "@/app/_layout/cta";
+import { routes } from "../../routes";
 
 export default function Header() {
   const pathname = usePathname();
@@ -16,14 +16,12 @@ export default function Header() {
   const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
-  // 1) Hard-coded CTA options
-  const desktopCtaOptions = ["auth", "shopping_cart"];
-  const mobileCtaOptions = ["auth", "notifications"];
-
   // 2) Filter routes for "stacked" layout
-  const stackedRoutes = routes.filter((r) =>
-    r.showInLayouts?.includes("stacked")
-  );
+const stackedRoutes = routes.filter((route) =>
+  route.showInLayouts?.includes("stacked")
+);
+
+    const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
 
   // Center active link logic
   useEffect(() => {
@@ -136,10 +134,10 @@ export default function Header() {
 
             {/* Right: CTA */}
             <div className="hidden md:flex items-center space-x-4">
-              <CTA options={desktopCtaOptions} />
+              <CTA options={ctaOptions} />
             </div>
             <div className="flex md:hidden">
-              <CTA options={mobileCtaOptions} />
+              <CTA options={ctaOptions} />
             </div>
           </div>
         </div>

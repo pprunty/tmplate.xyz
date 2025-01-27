@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { routes } from "@/app/routes";
-import type { Route } from "@/app/routes";
+import { routes } from "../../routes";
+import type { Route } from "../../routes";
 import { Menu } from "lucide-react";
 
 // Shared CTA
-import CTA from "@/app/_layout/cta";
+import CTA, { CTAOption } from "@/app/_layout/cta";
 
 // If you have a logo
 import Logo from "@/app/_layout/logo";
@@ -23,7 +23,7 @@ export default function Header() {
 
   // The CTA items we want to display in the basic layout
   // Hard-coded here for clarity; you can customize
-  const ctaOptions = ["auth", "notifications"];
+    const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
 
   return (
     <header

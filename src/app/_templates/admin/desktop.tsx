@@ -6,7 +6,7 @@ import Logo from "@/app/_layout/logo";
 import Footer from "@/app/_layout/footer";
 import Header from "./header";
 import { routes } from "@/app/routes";
-import type { Route } from "@/app/routes";
+// import type { Route } from "@/app/routes";
 
 interface DesktopLayoutProps {
   children: React.ReactNode;
@@ -57,7 +57,7 @@ export default function DesktopLayout({ children }: DesktopLayoutProps) {
                         : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800"
                     }`}
                   >
-                    {Icon && <Icon size={16} />}
+                    {Icon && <Icon/>}
                     <span>{label}</span>
                   </Link>
                 </li>

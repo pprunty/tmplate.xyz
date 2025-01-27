@@ -2,11 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
-import { routes } from "@/app/routes";
-import type { Route } from "@/app/routes";
+import { routes } from "../../routes";
+import type { Route } from "../../routes";
 
 // Shared CTA
-import CTA from "@/app/_layout/cta";
+import CTA, { CTAOption } from "@/app/_layout/cta";
 import Logo from "@/app/_layout/logo";
 
 const adminRoutes = routes.filter((route) =>
@@ -14,7 +14,7 @@ const adminRoutes = routes.filter((route) =>
 );
 
 export default function AdminHeader() {
-  const ctaOptions = ["auth", "shopping_cart"];
+    const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
 
   return (
     <header

@@ -9,8 +9,8 @@ interface OTPInputProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFullFill?: () => void;
-  setFieldError: (field: string, message: string) => void;
-  setFieldTouched: (field: string, isTouched: boolean) => void;
+  setFieldError?: (field: string, message: string) => void;
+  setFieldTouched?: (field: string, isTouched: boolean) => void;
   autoFocus?: boolean;
   autoSubmit?: boolean;
   disabled?: boolean;
@@ -53,15 +53,21 @@ const OTPInput: React.FC<OTPInputProps> = ({
     const newErrors = [...errors];
     if (newValue === '') {
       newErrors[index] = false;
-      setFieldError("otp", "");
+       if (setFieldError) {
+            setFieldError("otp", "");
+          }
     } else {
       const isValid = isValidInput(newValue, inputType);
       if (!isValid) {
+if (setFieldError) {
         setFieldError("otp", `invalid character '${newValue}'. only numeric values allowed`);
-        newErrors[index] = true;
+      }
+              newErrors[index] = true;
       } else {
+if (setFieldError) {
         setFieldError("otp", "");
-        newErrors[index] = false;
+      }
+              newErrors[index] = false;
       }
     }
     setErrors(newErrors);
@@ -89,6 +95,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     onBlur(e);
+    if (setFieldTouched)
     setFieldTouched(name, true);
   };
 
