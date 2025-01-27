@@ -17,11 +17,11 @@ export default function Header() {
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
   // 2) Filter routes for "stacked" layout
-const stackedRoutes = routes.filter((route) =>
-  route.showInLayouts?.includes("stacked")
-);
+  const stackedRoutes = routes.filter((route) =>
+    route.showInLayouts?.includes("stacked")
+  );
 
-    const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
+  const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
 
   // Center active link logic
   useEffect(() => {
@@ -68,17 +68,19 @@ const stackedRoutes = routes.filter((route) =>
     };
   }, [isScrollingDown]);
 
-  // Recursive rendering for nested routes (for demonstration)
+  // Recursive rendering for nested routes
   const renderRoutes = (routesToRender: typeof routes, isMobile = false) => (
     <ul className={isMobile ? "flex space-x-2 py-2" : "flex space-x-2"}>
       {routesToRender.map(({ href, label, children }) => {
         const isActive = pathname === href;
+
         const desktopClasses = isActive
-          ? "text-white font-semibold text-sm"
-          : "text-gray-300 hover:text-white font-medium text-sm";
+          ? "text-primary-text-light dark:text-primary-text-dark font-semibold text-sm"
+          : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark font-medium text-sm";
+
         const mobileClasses = isActive
-          ? "bg-slate-600 text-white text-xs font-light"
-          : "bg-slate-700 text-white hover:bg-slate-600 text-xs font-light";
+          ? "bg-highlight-light dark:bg-highlight-dark text-contrast-dark dark:text-contrast-light text-xs font-light"
+          : "bg-secondary-background-light dark:bg-secondary-background-dark text-primary-text-light dark:text-primary-text-dark hover:bg-primary-active-light dark:hover:bg-primary-active-dark text-xs font-light";
 
         return (
           <li key={href} className={isMobile ? "" : "relative group ml-6"}>
@@ -90,15 +92,13 @@ const stackedRoutes = routes.filter((route) =>
             >
               {label}
             </Link>
-
-            {/* Dropdown for children (desktop only) */}
             {!isMobile && children && children.length > 0 && (
-              <ul className="absolute left-0 top-full mt-2 bg-gray-800 shadow-md rounded-md hidden group-hover:block">
+              <ul className="absolute left-0 top-full mt-2 bg-primary-background-light dark:bg-primary-background-dark shadow-md rounded-md hidden group-hover:block">
                 {children.map((child) => (
                   <li key={child.href}>
                     <Link
                       href={child.href}
-                      className="block px-4 py-2 text-sm hover:bg-gray-700"
+                      className="block px-4 py-2 text-sm hover:bg-secondary-active-light dark:hover:bg-secondary-active-dark"
                     >
                       {child.label}
                     </Link>
@@ -113,18 +113,18 @@ const stackedRoutes = routes.filter((route) =>
   );
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 border-b border-gray-200 dark:border-[#333] bg-slate-900 text-white">
-      <div className="max-w-screen-xl mx-auto">
+    <nav className="bg-transparent bg-opacity-40 backdrop-blur-sm text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
+      <div className="max-w-screen-2xl mx-auto sm:px-2">
         {/* Top row (collapses on scroll) */}
         <div
-          className={`overflow-hidden backdrop-blur-sm bg-slate-900/90 transition-all duration-300 ${
+          className={`overflow-hidden ${
             isTopRowVisible ? "h-12 opacity-100" : "h-0 opacity-0"
-          } px-2 sm:h-16 md:opacity-100 md:transition-none`}
+          } transition-all px-2 duration-300 sm:h-16 md:opacity-100 md:transition-none`}
         >
-          <div className="flex items-center justify-between h-12 sm:h-16">
+          <div className="flex items-center justify-between h-16">
             {/* Left: Logo + desktop routes */}
             <div className="flex items-center space-x-2">
-              <div className="text-xl font-bold">
+              <div className="text-xl sm:text-2xl font-bold text-primary-text-light dark:text-primary-text-dark flex-shrink-0">
                 <Logo className="h-8 w-auto sm:h-12" />
               </div>
               <div className="hidden md:flex items-center space-x-2">
@@ -133,17 +133,17 @@ const stackedRoutes = routes.filter((route) =>
             </div>
 
             {/* Right: CTA */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
               <CTA options={ctaOptions} />
             </div>
-            <div className="flex md:hidden">
+            <div className="flex md:hidden flex-shrink-0">
               <CTA options={ctaOptions} />
             </div>
           </div>
         </div>
 
         {/* Mobile nav (scrollable horizontally) */}
-        <div className="md:hidden py-2 bg-slate-900/70 backdrop-blur-sm">
+        <div className="md:hidden py-2">
           <div
             ref={carouselRef}
             className="overflow-x-auto px-1 whitespace-nowrap scrollbar-hide"
