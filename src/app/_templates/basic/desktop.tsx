@@ -17,7 +17,6 @@ export default function DesktopLayout({ children }: DesktopLayoutProps) {
       <main className="flex-1 p-6 overflow-auto">
         <div
           className="
-            bg-white dark:bg-[#111]
             rounded-md p-6
             shadow-sm
             border border-gray-200 dark:border-[#252525]

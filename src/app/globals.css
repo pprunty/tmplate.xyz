@@ -10,14 +10,14 @@
     color-scheme: light;
 
     @apply bg-[#fcfcfc];
-    @apply text-[#1c1c1c];
+    @apply text-[#000];
   }
 
   /* Dark mode settings */
   :root.dark {
     color-scheme: dark;
     /* You can change theme dark color here to #131313 for example, remember to change it in theme-effect.ts too */
-    @apply bg-[#1c1c1c];
+    @apply bg-[#000];
     @apply text-[#fcfcfc];
   }
 
@@ -39,11 +39,11 @@
     height: 6px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #1c1c1c;
+    background-color: #000;
     border-radius: 0px;
   }
   .dark ::-webkit-scrollbar-track {
-    background: #1c1c1c;
+    background: #000;
   }
   .dark ::-webkit-scrollbar-thumb {
     background-color: #ccc;

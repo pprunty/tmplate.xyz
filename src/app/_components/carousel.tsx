@@ -49,7 +49,7 @@ const Carousel: React.FC<CarouselProps> = ({
       {/* Blur gradients */}
       {showLeftGradient && (
         <div
-          className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-white dark:from-[#1c1c1c] to-transparent z-10"
+          className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-white dark:from-[#000] to-transparent z-10"
           style={{
             opacity: 1,
             filter: 'blur(0px)',
@@ -59,7 +59,7 @@ const Carousel: React.FC<CarouselProps> = ({
       )}
       {showRightGradient && (
         <div
-          className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white dark:from-[#1c1c1c] to-transparent z-10"
+          className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white dark:from-[#000] to-transparent z-10"
           style={{
             opacity: 1,
             filter: 'blur(0px)',
