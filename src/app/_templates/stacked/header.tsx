@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NavLinks from "@/app/_layout/nav-links";
 
 import Logo from "@/app/_layout/logo";
 import CTA, { CTAOption } from "@/app/_layout/cta";
@@ -113,45 +114,46 @@ export default function Header() {
   );
 
   return (
-    <nav className="backdrop-blur-md bg-primary-background-light/95 dark:bg-primary-background-dark/95 text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
-      <div className="max-w-screen-2xl mx-auto sm:px-2">
-        {/* Top row (collapses on scroll) */}
-        <div
-          className={`overflow-hidden ${
-            isTopRowVisible ? "h-12 opacity-100" : "h-0 opacity-0"
-          } transition-all px-2 duration-300 sm:h-16 md:opacity-100 md:transition-none`}
-        >
-          <div className="flex items-center justify-between h-16">
-            {/* Left: Logo + desktop routes */}
-            <div className="flex items-center space-x-2">
-              <div className="text-xl sm:text-2xl font-bold text-primary-text-light dark:text-primary-text-dark flex-shrink-0">
-                <Logo className="h-8 w-auto sm:h-12" />
-              </div>
-              <div className="hidden md:flex items-center space-x-2">
-                {renderRoutes(stackedRoutes)}
-              </div>
-            </div>
-
-            {/* Right: CTA */}
-            <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
-              <CTA options={ctaOptions} />
-            </div>
-            <div className="flex md:hidden flex-shrink-0">
-              <CTA options={ctaOptions} />
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile nav (scrollable horizontally) */}
-        <div className="md:hidden py-2">
+      <nav className="backdrop-blur-md bg-primary-background-light/95 dark:bg-primary-background-dark/95 text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
+        <div className="max-w-screen-2xl mx-auto sm:px-2">
+          {/* Top row (collapses on scroll) */}
           <div
-            ref={carouselRef}
-            className="overflow-x-auto px-1 whitespace-nowrap scrollbar-hide"
+            className={`overflow-hidden ${
+              isTopRowVisible ? "h-12 opacity-100" : "h-0 opacity-0"
+            } transition-all px-2 duration-300 sm:h-16 md:opacity-100 md:transition-none`}
           >
-            {renderRoutes(stackedRoutes, true)}
+            <div className="flex items-center justify-between h-16">
+              {/* Left: Logo + desktop routes */}
+              <div className="flex items-center space-x-2">
+                <div className="text-xl sm:text-2xl font-bold text-primary-text-light dark:text-primary-text-dark flex-shrink-0">
+                  <Logo className="h-8 w-auto sm:h-12" />
+                </div>
+                <div className="hidden md:flex items-center space-x-2">
+                  {renderRoutes(stackedRoutes)}
+                </div>
+              </div>
+
+              {/* Right: CTA */}
+              <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
+                <CTA options={ctaOptions} />
+              </div>
+              <div className="flex md:hidden flex-shrink-0">
+                <CTA options={ctaOptions} />
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile nav (scrollable horizontally) */}
+          <div className="md:hidden py-2">
+            <div
+              ref={carouselRef}
+              className="overflow-x-auto px-1 whitespace-nowrap scrollbar-hide"
+            >
+              {/* Use the modularized component for mobile navigation links */}
+              <NavLinks routes={stackedRoutes} />
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-  );
+      </nav>
+    );
 }

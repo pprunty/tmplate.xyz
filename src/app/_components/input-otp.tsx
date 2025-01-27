@@ -146,7 +146,7 @@ if (setFieldError) {
             onBlur={handleBlur}
             onKeyDown={e => handleKeyDown(e, index)}
             ref={el => { inputRefs.current[index] = el; }}
-            className={`flex-grow w-full max-w-[4rem] h-12 text-center text-xl font-mono border rounded focus:outline-none
+            className={`flex-grow w-full max-w-[4rem] h-8 sm:h-12 text-center text-xl font-mono border rounded focus:outline-none
               ${errors[index] ? 'border-red-500 animate-shake' : 'border-primary-border-light dark:border-primary-border-dark'}
               ${disabled ? 'bg-secondary-background-light dark:bg-secondary-background-dark' : 'bg-primary-background-light dark:bg-primary-background-dark'}
               ${errors[index] ? 'focus:ring-red-500 focus:border-red-500' : 'focus:ring-contrast-light focus:border-contrast-light dark:focus:ring-contrast-dark dark:focus:border-contrast-dark'}

@@ -23,7 +23,7 @@ export default function Header() {
 
   // The CTA items we want to display in the basic layout
   // Hard-coded here for clarity; you can customize
-    const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
+    const ctaOptions: CTAOption[] = ["auth"];
 
   return (
     <header

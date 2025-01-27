@@ -5,7 +5,12 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { routes } from "@/app/routes";
 
-export default function BottomBar() {
+// Define the prop types
+interface BottomBarProps {
+  showLabels?: boolean; // Optional prop to toggle labels
+}
+
+export default function BottomBar({ showLabels = false }: BottomBarProps) {
   const pathname = usePathname();
 
   // Memoize bottom bar routes
@@ -17,7 +22,7 @@ export default function BottomBar() {
     <nav
       className="block md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-primary-border-light dark:border-primary-border-dark backdrop-blur-sm bg-primary-background-light/90 dark:bg-primary-background-dark/90"
     >
-      <ul className="flex justify-around">
+      <ul className="flex justify-around py-2">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => {
           const isActive = pathname.startsWith(href);
           return (
@@ -38,7 +43,8 @@ export default function BottomBar() {
                     }`}
                   />
                 )}
-                <span className="text-[11px] pt-1">{label}</span>
+                {/* Conditionally render the label */}
+                {showLabels && <span className="text-[11px] pt-1">{label}</span>}
               </Link>
             </li>
           );
