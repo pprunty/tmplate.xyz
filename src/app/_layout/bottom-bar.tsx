@@ -20,7 +20,7 @@ export default function BottomBar({ showLabels = false }: BottomBarProps) {
 
   return (
     <nav
-      className="block md:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-md bg-primary-background-light/85 dark:bg-primary-background-dark/85"
+      className="block md:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/85 dark:bg-primary-background-dark/85"
     >
       <ul className="flex justify-around py-2">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => {
