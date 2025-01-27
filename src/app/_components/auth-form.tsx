@@ -124,12 +124,6 @@ const LoginForm: React.FC = () => {
 {({ isSubmitting, errors, touched, setFieldError, setFieldTouched }: FormikProps<{ email: string; otp: string }>) => (
   <Form>
     <div className="mt-4">
-      <label
-        htmlFor="email"
-        className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
-      >
-        Email
-      </label>
       <Field
         name="email"
         id="email"

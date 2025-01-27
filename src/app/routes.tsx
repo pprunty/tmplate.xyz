@@ -16,7 +16,7 @@ export const routes: Route[] = [
     translationKey: 'home',
     label: 'Home',
     icon: Home,
-    showInLayouts: ['admin'],
+    showInLayouts: ['admin', 'stacked'],
   },
   {
     href: '/profile',

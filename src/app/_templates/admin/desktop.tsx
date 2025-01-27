@@ -33,7 +33,7 @@ export default function DesktopLayout({ children }: DesktopLayoutProps) {
         className="
           sticky top-0
           flex flex-col
-          w-[15%] min-w-52 max-w-64
+          w-[10%] min-w-52 max-w-64
           border-r border-gray-200 dark:border-[#252525]
           bg-white dark:bg-[#111]
           text-gray-900 dark:text-white
@@ -57,7 +57,7 @@ export default function DesktopLayout({ children }: DesktopLayoutProps) {
                         : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800"
                     }`}
                   >
-                    {Icon && <Icon/>}
+                    {Icon && <Icon className={"w-4 h-4"} />}
                     <span>{label}</span>
                   </Link>
                 </li>

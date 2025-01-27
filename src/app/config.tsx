@@ -3,7 +3,7 @@ const config = {
   process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : "https://tmplate.xyz",
-  layout: "admin",
+  layout: "stacked",
   branding: {
         logo_svg_path: null,
         show_brand_name: false,
