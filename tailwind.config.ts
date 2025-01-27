@@ -24,7 +24,7 @@ const config: Config = {
           },
           background: {
             light: "#FFFFFF",
-            dark: "#0D0D0D",
+            dark: "#000",
             hover: {
               light: "#F5F5F5", // Light mode hover background
               dark: "#1A1A1A", // Dark mode hover background
