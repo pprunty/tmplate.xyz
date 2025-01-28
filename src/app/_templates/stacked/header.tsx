@@ -114,7 +114,7 @@ export default function Header() {
   );
 
   return (
-      <nav className="backdrop-blur-md bg-primary-background-light/85 dark:bg-primary-background-dark/85 text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
+      <nav className="backdrop-blur-lg bg-primary-background-light/85 dark:bg-primary-background-dark/85 text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
         <div className="max-w-screen-2xl mx-auto sm:px-2">
           {/* Top row (collapses on scroll) */}
           <div
