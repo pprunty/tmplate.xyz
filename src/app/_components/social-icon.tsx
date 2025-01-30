@@ -47,8 +47,8 @@ export function SocialIcon({ platform, className = '' }: SocialIconProps) {
       active:text-contrast-active-light dark:active:text-contrast-active-dark
 
       transition-colors
-      sm:w-5 sm:h-5
       w-5 h-5
+      sm:w-4.5 sm:h-4.5
     `,
     fill: 'currentColor', // Theme-aware coloring
     'aria-label': `${platform} profile`, // Accessibility label

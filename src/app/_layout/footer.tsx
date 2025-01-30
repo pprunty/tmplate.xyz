@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { ThemeSwitcher } from "@/app/_components/theme-switcher";
 
 // Assuming you have these two in the same file or as separate modules
 // import { SocialPlatform } from '@/types/SocialPlatform';
@@ -244,6 +245,7 @@ export default function Footer() {
             </div>
           )}
         </div>
+      <ThemeSwitcher/>
       </div>
     </footer>
   );

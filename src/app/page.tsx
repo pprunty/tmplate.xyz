@@ -1,4 +1,3 @@
-import { ThemeSwitcher } from "./_components/theme-switcher";
 import LayoutToggle from "./_components/layout-toggle";
 
 export default function Home() {
@@ -40,10 +39,6 @@ export default function Home() {
         <LayoutToggle />
       </section>
 
-      {/* Theme Switcher */}
-      <section>
-        <ThemeSwitcher />
-      </section>
     </div>
   );
 }
