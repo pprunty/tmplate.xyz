@@ -10,7 +10,7 @@ import Logo from "@/app/_layout/logo";
 
 export default function AdminHeader() {
   const pathname = usePathname();
-  const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
+  const ctaOptions: CTAOption[] = ["auth"];
 
   // Filter routes for admin layout
   const adminRoutes = routes.filter((route) =>

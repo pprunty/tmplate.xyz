@@ -3,18 +3,17 @@
 
 import React from "react";
 import Header from "./header";
-// If you have a shared footer somewhere:
-import Footer from "@/app/_layout/footer"; // or wherever your Footer is
+import Footer from "@/app/_layout/footer";
 
-interface DesktopLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function DesktopLayout({ children }: DesktopLayoutProps) {
+export default function DesktopLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="p-6">{children}</main>
+      <main className="flex-1 pt-20 pb-12">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          {children}
+        </div>
+      </main>
       <Footer />
     </div>
   );

@@ -36,10 +36,8 @@ export default function Footer() {
         border-t
         justify-center
         border-primary-border-light dark:border-primary-border-dark
+        pt-6 pb-12
       `}
-      style={{
-        marginTop: '5vw',
-      }}
     >
       <div className="max-w-screen-xl p-6 sm:px-8 w-full sm:px-6 py-10">
         <div

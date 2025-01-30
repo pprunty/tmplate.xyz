@@ -4,25 +4,16 @@
 import React from "react";
 import Header from "./header";
 import Footer from "@/app/_layout/footer";
-import BottomBar from "@/app/_layout/bottom-bar"; // Import BottomBar
+import BottomBar from "@/app/_layout/bottom-bar";
 
-interface MobileLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function MobileLayout({ children }: MobileLayoutProps) {
+export default function MobileLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative min-h-screen pb-[56px]">
-      {/* Sticky header */}
+    <div className="flex flex-col min-h-screen">
       <Header />
-
-      {/* Main content */}
-      <main className="pt-16 p-4">{children}</main>
-
-      {/* Footer */}
+      <main className="flex-1 pt-16 pb-24 px-4">
+        {children}
+      </main>
       <Footer />
-
-      {/* BottomBar component for mobile */}
       <BottomBar />
     </div>
   );
