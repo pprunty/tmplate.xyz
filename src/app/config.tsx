@@ -9,11 +9,11 @@ const config = {
         show_brand_name: false,
         url: "/",
         brand_name: {
-          name: "[tmp]",
+          name: "tmplate.xyz",
           font_family: "monospace",
           font_weight: "200"
         },
-        company_type: "Corp."
+        company_type: ""
       },
           footer: {
             show_footer: true,

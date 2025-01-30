@@ -73,7 +73,7 @@ export default function Footer() {
                 Vercel
               </span>
             )}
-            <p className="text-sm mb-4 text-secondary-text-light dark:text-secondary-text-dark">
+            <p className="mb-4 font-mono text-[13px] text-secondary-text-light dark:text-secondary-text-dark">
               © 2024 {`${brandName}${companyType ? ` ${companyType}` : ''}`}
             </p>
 

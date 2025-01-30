@@ -5,7 +5,7 @@ export default function Home() {
       {/* Page Heading */}
       <section>
         <h1 className="text-4xl font-bold mb-2">Welcome to My Website</h1>
-        <p className="text-lg text-gray-700 dark:text-gray-300">
+        <p className="text-md text-base">
          This template application showcases Polymorphic Web Design Principles (PWDP). To read the full essay on what that
          is, you can see here.
 
