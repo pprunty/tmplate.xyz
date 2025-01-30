@@ -14,12 +14,6 @@ export default function MasterLayout({ children }: MasterLayoutProps) {
   const { layout } = config;
 
   switch (layout) {
-    case "admin":
-      return <AdminLayout>{children}</AdminLayout>;
-    case "stacked": // <-- new case for 'stacked'
-      return <StackedLayout>{children}</StackedLayout>;
-    case "social":
-     return <SocialLayout>{children}</SocialLayout>;
     case "basic":
     default:
       return <BasicLayout>{children}</BasicLayout>;

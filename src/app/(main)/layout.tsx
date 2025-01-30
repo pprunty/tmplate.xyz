@@ -1,15 +1,12 @@
-import "./globals.css";
-import { themeEffect } from "./_components/theme-effect";
-import { doge } from "./doge";
+import "../globals.css";
+import { themeEffect } from "@/app/_components/theme-effect";
+import { doge } from "../doge";
 import { Inter } from "next/font/google";
 import type { Metadata, Viewport } from "next";
-import ClientComponents from "./client";
-import config from "./config"; // config with SEO, productionUrl, analytics, etc.
-import { Analytics } from "./analytics";
+import ClientComponents from "../client";
+import config from "../config"; // config with SEO, productionUrl, analytics, etc.
+import { Analytics } from "../analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-// -- Import your Sidebar component
-import MasterLayout from "./_templates/master";
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
@@ -94,9 +91,9 @@ export default function RootLayout({
             Wrap all pages with the Sidebar.
             The Sidebar itself handles rendering its menu plus a header & footer area.
         */}
-        <MasterLayout>
+        <>
           {children}
-        </MasterLayout>
+        </>
 
         {/* The rest of your global client components and scripts */}
         <ClientComponents />

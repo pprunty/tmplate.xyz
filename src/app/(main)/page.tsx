@@ -1,4 +1,4 @@
-import LayoutToggle from "./_components/layout-toggle";
+import LayoutToggle from "@/app/_components/layout-toggle";
 
 export default function Home() {
   return (

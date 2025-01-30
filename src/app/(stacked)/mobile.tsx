@@ -8,13 +8,13 @@ import BottomBar from "@/app/_layout/bottom-bar";
 
 export default function MobileLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <Header />
       <main className="flex-1 pt-16 pb-24 px-4">
         {children}
       </main>
+      <BottomBar />
       <Footer />
-      <BottomBar showLabels />
     </div>
   );
 }
