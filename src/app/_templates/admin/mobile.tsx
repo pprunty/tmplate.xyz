@@ -14,7 +14,7 @@ import Footer from "@/app/_layout/footer";
 export default function MobileAdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const ctaOptions: CTAOption[] = ["auth", "shopping_cart"];
+  const ctaOptions: CTAOption[] = ["auth"];
 
   const adminRoutes = routes.filter((route) =>
     route.showInLayouts?.includes("admin")

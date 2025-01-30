@@ -1,62 +1,91 @@
-// app/_templates/admin/header.tsx (updated)
-"use client";
+"use client"
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { routes } from "../../routes";
-import CTA, { CTAOption } from "@/app/_layout/cta";
-import Logo from "@/app/_layout/logo";
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import CTA, { type CTAOption } from "@/app/_layout/cta"
+import Logo from "@/app/_layout/logo"
 
 export default function AdminHeader() {
-  const pathname = usePathname();
-  const ctaOptions: CTAOption[] = ["auth"];
+  const pathname = usePathname()
+  const ctaOptions: CTAOption[] = ["auth"]
 
-  // Filter routes for admin layout
-  const adminRoutes = routes.filter((route) =>
-    route.showInLayouts?.includes("admin")
-  );
+  const tabs = [
+    { href: "/admin/dashboard", label: "Dashboard" },
+    { href: "/admin/users", label: "User Management" },
+    { href: "/admin/analytics", label: "Analytics" },
+    { href: "/admin/settings", label: "Settings" },
+  ]
 
   return (
     <header
-      className="
-        sticky top-0
-        z-50
-        h-16
-        border-b border-gray-200 dark:border-[#252525]
-        bg-white dark:bg-[#111]
-        bg-opacity-80
+      className={`
+        sticky top-0 z-50
         backdrop-blur-lg
-      "
+        bg-primary-background-light/85 dark:bg-primary-background-dark/85
+        border-b border-[#EAEAEA] dark:border-[#333]
+        text-white dark:text-[#888]
+      `}
     >
-      <div className="flex items-center justify-between h-full px-4">
-        {/* Logo visible on mobile */}
-        <div className="md:hidden">
-          <Logo />
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          {adminRoutes.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-white ${
-                pathname === href
-                  ? "text-gray-900 dark:text-white"
-                  : "text-gray-600 dark:text-gray-400"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* CTA Section */}
-        <div className="flex items-center gap-4">
-          <CTA options={ctaOptions} />
+      {/* Main Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Row: Logo + CTA */}
+        <div className="flex justify-between items-center h-16">
+          <div className="flex-shrink-0 flex items-center">
+            <Logo />
+          </div>
+          <div className="flex items-center space-x-4">
+            <CTA options={ctaOptions} />
+          </div>
         </div>
       </div>
+
+      {/* Tabs / Navigation */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+          {tabs.map(({ href, label }) => {
+            const isActive = pathname === href
+
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={isActive ? "page" : undefined}
+                className={`
+                  group relative overflow-hidden
+                  whitespace-nowrap py-4 px-3
+                  font-medium text-sm
+                  border-b-2
+                  transition-colors duration-300
+                  ${
+                    isActive
+                      ? // Active tab: bottom border, special text color
+                        "border-highlight-light dark:border-highlight-dark text-contrast-dark dark:text-contrast-light"
+                      : // Inactive tab: no border, normal text
+                        "border-transparent text-primary-text-light dark:text-primary-text-dark"
+                  }
+                `}
+              >
+                {/* Animated background for hover (inactive tabs) */}
+                {!isActive && (
+                  <span
+                    className="
+                      absolute inset-0
+                      transform origin-left scale-x-0 group-hover:scale-x-100
+                      transition-transform duration-300
+                      bg-primary-active-light dark:bg-primary-active-dark
+                      rounded-md
+                      z-0
+                    "
+                  />
+                )}
+
+                {/* Label text on top */}
+                <span className="relative z-10">{label}</span>
+              </Link>
+            )
+          })}
+        </nav>
+      </div>
     </header>
-  );
+  )
 }
