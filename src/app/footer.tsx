@@ -74,7 +74,7 @@ export default function Footer() {
               </span>
             )}
             <p className="mb-4 font-mono text-[13px] text-secondary-text-light dark:text-secondary-text-dark">
-              © 2024 {`${brandName}${companyType ? ` ${companyType}` : ''}`}
+              {`${new Date().getFullYear()}`} {`${brandName}${companyType ? ` ${companyType}` : ''}`}
             </p>
 
             {/* Social Icons */}
