@@ -85,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body
-        className={`${inter.className} antialiased dark:text-gray-100 bg-white dark:bg-gray-900`}
+        className={`${inter.className} antialiased`}
       >
         {/* 1) Full-height container, no scrolling */}
         <div className="h-screen w-full overflow-hidden md:flex">
