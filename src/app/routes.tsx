@@ -16,21 +16,21 @@ export const routes: Route[] = [
     translationKey: 'home',
     label: 'Home',
     icon: Home,
-    showInLayouts: ['admin', 'stacked'],
+    showInLayouts: ['admin', 'stacked', 'bottom-bar'],
   },
   {
     href: '/profile',
     translationKey: 'profile',
     label: 'Profile',
     icon: User,
-    showInLayouts: ['basic'],
+    showInLayouts: ['basic', 'stacked'],
   },
   {
     href: '/settings',
     translationKey: 'settings',
     label: 'Settings',
     icon: Settings,
-    showInLayouts: ['admin'],
+    showInLayouts: ['admin', 'stacked'],
     children: [
       {
         href: '/settings/account',
@@ -53,7 +53,7 @@ export const routes: Route[] = [
     translationKey: 'products',
     label: 'Products',
     icon: ShoppingBag,
-    showInLayouts: ['basic', 'admin'],
+    showInLayouts: ['basic', 'admin', 'stacked'],
     role: ['admin'],
     children: [
       {
@@ -85,7 +85,7 @@ export const routes: Route[] = [
         translationKey: 'search',
         label: 'Search',
         icon: Search,
-        showInLayouts: ['stacked', 'admin'],
+        showInLayouts: ['stacked', 'admin', 'bottom-bar'],
       },
   {
     href: '/discounts',

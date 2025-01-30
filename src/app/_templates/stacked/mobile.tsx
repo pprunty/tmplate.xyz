@@ -14,7 +14,7 @@ export default function MobileLayout({ children }: { children: React.ReactNode }
         {children}
       </main>
       <Footer />
-      <BottomBar />
+      <BottomBar showLabels />
     </div>
   );
 }

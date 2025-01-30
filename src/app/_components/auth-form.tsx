@@ -245,7 +245,7 @@ const LoginForm: React.FC = () => {
                       <Button type="submit"
                       variation="submit"
                        disabled={isSubmitting}>
-                        {showOTP ? 'Continue with login code' : 'Continue'}
+                        {showOTP ? 'Continue with login code' : 'Continue with email'}
                       </Button>
                     </div>
                   </Form>

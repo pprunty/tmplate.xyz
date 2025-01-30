@@ -15,14 +15,14 @@ export default function BottomBar({ showLabels = false }: BottomBarProps) {
 
   // Memoize bottom bar routes
   const bottomBarRoutes = useMemo(() => {
-    return routes.filter((r) => r.showInLayouts?.includes("stacked"));
+    return routes.filter((r) => r.showInLayouts?.includes("bottom-bar"));
   }, []);
 
   return (
     <nav
-      className="block md:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80"
+      className="block md:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]"
     >
-      <ul className="flex justify-around py-2">
+      <ul className="flex justify-around ">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => {
           const isActive = pathname.startsWith(href);
           return (
@@ -44,7 +44,7 @@ export default function BottomBar({ showLabels = false }: BottomBarProps) {
                   />
                 )}
                 {/* Conditionally render the label */}
-                {showLabels && <span className="text-[11px] pt-1">{label}</span>}
+                {showLabels && <span className="text-[11px]">{label}</span>}
               </Link>
             </li>
           );
