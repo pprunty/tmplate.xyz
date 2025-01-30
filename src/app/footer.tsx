@@ -65,7 +65,7 @@ export default function Footer() {
                 alt="Brand Logo"
                 width={120}
                 height={30}
-                className="mb-4"
+                className="mb-4 rounded-md"
                 priority
               />
             ) : (
@@ -221,8 +221,8 @@ export default function Footer() {
                     <img
                       src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                       alt="Download on the App Store"
-                      width={148}
-                      height={50}
+                      width={120}
+                      height={30}
                       className="p-2"
                     />
                   </a>

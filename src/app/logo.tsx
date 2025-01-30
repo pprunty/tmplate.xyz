@@ -36,7 +36,7 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8 sm:w-9 sm:h-9 fill-current text-black dark:text-white"
+            className="w-10 h-10 sm:w-9 sm:h-9 fill-current text-black dark:text-white"
             width="32"
             height="32"
             viewBox="0 0 300.000000 300.000000"

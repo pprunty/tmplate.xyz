@@ -1,4 +1,4 @@
-import LayoutToggle from "./_components/layout-toggle";
+import LayoutToggle from "../../layout-toggle";
 
 export default function Home() {
   return (
@@ -33,6 +33,10 @@ export default function Home() {
          - `stacked` layout is based loosely off Spotify
          - `basic` layout is based off most basic website layouts
         </p>
+      </section>
+
+ <section>
+        <LayoutToggle />
       </section>
 
     </div>

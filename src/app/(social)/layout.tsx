@@ -7,9 +7,7 @@ import ClientComponents from "../client";
 import config from "../config"; // config with SEO, productionUrl, analytics, etc.
 import { Analytics } from "../analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Header from './header';
 import BottomBar from './bottom-bar';
-import Footer from "../footer"; // Import your new Sidebar
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
@@ -89,13 +87,13 @@ export default function RootLayout({
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className={`${inter.className} antialiased dark:text-gray-100`}>
-        <main className="p-6 pt-3 md:pt-6 min-h-screen">
-         <Header />
-         {children}
-         <BottomBar showLabels/>
-        </main>
-         <Footer/>
+            <body className="dark:text-gray-100 max-w-2xl m-auto">
+              <main className="p-6 pt-3 md:pt-6 min-h-screen">
+                {children}
+               <BottomBar showLabels/>
+              </main>
+
+        {/* The rest of your global client components and scripts */}
         <ClientComponents />
         <Analytics />
         <SpeedInsights />

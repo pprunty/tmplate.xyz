@@ -3,12 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Logo from "@/app/_layout/logo";
+import Logo from "../logo";
 import { routes } from "./routes";
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const userRoles = ["admin"]; // Replace with your actual role management
 
   return (
     <aside

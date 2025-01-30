@@ -48,7 +48,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <div className="w-full max-w-sm p-6">
+      <div className="w-full max-w-sm p-4 sm:p-6">
         <div className="space-y-4">
           {/* Continue with Google Button */}
           <Button

@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] p-1 sm:p-6 flex items-center justify-center"
+      className="fixed inset-0 z-[9999] p-1 sm:p-2 flex items-center justify-center"
       onClick={onClose}
     >
       <div

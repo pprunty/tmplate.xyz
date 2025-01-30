@@ -19,7 +19,7 @@ const config = {
             show_footer: true,
             show_social_icons: true,
             newsletter: true,
-            logo: "/assets/images/dice.gif",
+            logo: "/icon.webp",
             mobile_app: {
               show_ios: true,
               ios_url: "https://apps.apple.com/app/id123456789",

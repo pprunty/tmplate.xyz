@@ -11,7 +11,7 @@ export interface Route {
 }
 
 // Define the prefix (e.g., "admin")
-const PREFIX = "/stacked";
+const PREFIX = "/social";
 
 // Helper function to recursively add prefix to href values
 const addPrefixToRoutes = (routes: Route[], prefix: string): Route[] => {

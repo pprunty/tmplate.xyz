@@ -4,8 +4,8 @@ import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import clsx from "clsx"
-import { routes } from "../routes"
-import Logo from "@/app/_layout/logo"
+import { routes } from "./routes"
+import Logo from "../logo"
 import CTA, { type CTAOption } from "@/app/_layout/cta"
 
 export default function Header() {
