@@ -4,6 +4,7 @@ export default function Home() {
   return (
     <div className="space-y-8">
       {/* Page Heading */}
+              <LayoutToggle />
       <section>
         <h1 className="text-4xl font-bold mb-2">Welcome to My Website</h1>
         <p className="text-md text-base">
@@ -45,7 +46,6 @@ export default function Home() {
       </section>
 
  <section>
-        <LayoutToggle />
       </section>
 
     </div>

@@ -14,7 +14,7 @@ const BottomBar = memo(function BottomBar({ showLabels = false }: { showLabels?:
   [/* Add dependencies if routes are dynamic */]);
 
   return (
-    <nav className="fixed sm:hidden py-2 bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]">
+    <nav className="block md:hidden fixed py-4 bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]">
       <ul className="flex justify-around">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => (
           <BarItem 
@@ -45,20 +45,24 @@ const BarItem = memo(({ href, label, Icon, isActive, showLabels }: BarItemProps)
     <Link
       href={href}
       aria-current={isActive ? "page" : undefined}
-      className={`flex flex-col items-center transition-colors duration-300 ease-in-out ${
+      className={`flex flex-col items-center justify-center w-full h-full px-2 ${
         isActive
           ? "text-contrast-light dark:text-contrast-dark"
           : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark"
-      } ${showLabels ? "py-0" : "pt-2"}`}
+      } ${showLabels ? "py-1" : "py-2"}`} // Adjusted padding
     >
       {Icon && (
         <Icon
-          className={`w-6 h-6 mb-1 transform transition-transform duration-500 ease-in-out ${
+          className={`w-6 h-6 ${
             isActive ? "scale-110" : "scale-100"
-          }`}
+          } transition-transform duration-500 ease-in-out`}
         />
       )}
-      {showLabels && <span className="text-[11px]">{label}</span>}
+      {showLabels && (
+        <span className="text-[11px] leading-tight text-center mt-0.5">
+          {label}
+        </span>
+      )}
     </Link>
   </li>
 ));

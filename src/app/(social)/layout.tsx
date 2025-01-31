@@ -80,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className="dark:text-gray-100 max-w-2xl m-auto relative flex flex-col min-h-screen">
+<body className="dark:text-gray-100 max-w-2xl m-auto relative flex flex-col min-h-screen">
         {/* Desktop Sidebar */}
         <Sidebar />
 
@@ -88,13 +88,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
 
         {/* Main content area */}
-        <main className="flex-grow overflow-auto">
+        <main className="relative min-h-screen">
           <div className="min-h-full dark:bg-[#171717] border-0 border-[#262626] sm:border-2 sm:rounded-t-3xl p-6">
             {children}
           </div>
         </main>
-
-        {/* Mobile Bottom Bar */}
         <BottomBar />
 
         {/* Global client components and scripts */}

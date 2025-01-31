@@ -36,7 +36,7 @@ const baseRoutes: Route[] = [
     translationKey: "profile",
     label: "Profile",
     icon: User,
-    showInLayouts: ['basic', 'stacked'],
+    showInLayouts: ['basic', 'stacked', 'bottom-bar'],
   },
   {
     href: "/settings",
