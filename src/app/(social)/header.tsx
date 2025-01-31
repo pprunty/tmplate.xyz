@@ -10,7 +10,7 @@ export default function Header() {
         left-0
         w-full
         z-50
-        py-4
+        pt-2 pb-3
         sm:py-4
         flex
         items-center
@@ -30,7 +30,7 @@ export default function Header() {
 
              {/* Logo + CTA on Mobile (Hidden on md+) */}
              <div className="sm:hidden px-2 flex flex-col items-center w-full">
-               <Logo className="mb-2" /> {/* Centered logo */}
+               <Logo className="" /> {/* Centered logo */}
                <div className="w-full">
                  <CTA options={["auth"]} /> {/* Full-width CTA */}
                </div>
