@@ -1,4 +1,5 @@
-import { Home, Search, User, Settings, ShoppingBag, Users, Percent, FileText } from "lucide-react";
+import { Search, User, Settings, ShoppingBag, Users, Percent, FileText } from "lucide-react";
+import HomeIcon from "./components/HomeIcon";
 
 export interface Route {
   href: string;
@@ -28,8 +29,8 @@ const baseRoutes: Route[] = [
     href: "/",
     translationKey: "home",
     label: "Home",
-    icon: Home,
-    showInLayouts: ['admin', 'stacked', 'bottom-bar'],
+    icon: HomeIcon,
+    showInLayouts: ['admin', 'stacked', 'bottom-bar', 'sidebar'],
   },
   {
     href: "/profile",
@@ -96,7 +97,7 @@ const baseRoutes: Route[] = [
     translationKey: "search",
     label: "Search",
     icon: Search,
-    showInLayouts: ["stacked", "admin", "bottom-bar"],
+    showInLayouts: ["stacked", "admin", "bottom-bar", 'sidebar'],
   },
   {
     href: "/discounts",

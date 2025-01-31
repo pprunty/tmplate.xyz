@@ -4,7 +4,11 @@ import { useEffect, useLayoutEffect, useState, useCallback } from "react"
 import { Monitor, Sun, Moon } from "lucide-react"
 import { themeEffect } from "./theme-effect"
 
-export function ThemeSwitcher() {
+interface ThemeSwitcherProps {
+  vertical?: boolean
+}
+
+export function ThemeSwitcher({ vertical = false }: ThemeSwitcherProps) {
   const [preference, setPreference] = useState<undefined | null | string>(undefined)
 
   useLayoutEffect(() => {
@@ -26,8 +30,9 @@ export function ThemeSwitcher() {
   }, [onStorageChange])
 
   return (
-    <div className="inline-flex items-center bg-primary-background-light dark:bg-primary-background-dark rounded-full border border-primary-border-light dark:border-primary-border-dark">
-      {/* Buttons remain unchanged */}
+    <div
+      className={`flex ${vertical ? "flex-col space-y-2" : "inline-flex"} items-center bg-primary-background-light dark:bg-primary-background-dark rounded-full border border-primary-border-light dark:border-primary-border-dark p-1`}
+    >
       <button
         aria-label="System theme"
         className={`p-1.5 rounded-full transition-all duration-200 ${

@@ -8,6 +8,8 @@ import config from "../config"; // config with SEO, productionUrl, analytics, et
 import { Analytics } from "../analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import BottomBar from './bottom-bar';
+import Sidebar from "./sidebar";
+import Header from "./header"; // <-- Import your new header
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
@@ -66,18 +68,9 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-// Layout component
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${inter.variable} font-sans antialiased`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} font-sans antialiased`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -87,21 +80,44 @@ export default function RootLayout({
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-            <body className="dark:text-gray-100 max-w-2xl m-auto">
-              <main className="p-6 pt-3 md:pt-6 min-h-screen">
-                {children}
-               <BottomBar />
-              </main>
+      <body className="dark:text-gray-100 max-w-2xl m-auto relative">
+        {/* Desktop Sidebar */}
+        <Sidebar />
 
-        {/* The rest of your global client components and scripts */}
+        {/* The container that holds CTA, main content, etc. */}
+        <div className="relative w-full h-screen flex flex-col">
+          {/* Header (always visible) */}
+          <Header />
+
+          {/* Main content area with fixed background and scrollable interior */}
+          <div className="flex-1 overflow-hidden">
+            <main
+              className="
+                h-full
+                overflow-y-auto
+                scrollbar-hide
+                dark:bg-[#171717]
+                border-0
+                border-[#262626]
+                sm:border-2
+                sm:rounded-t-3xl
+                p-6
+              "
+            >
+              {children}
+            </main>
+          </div>
+        </div>
+
+        {/* Mobile Bottom Bar */}
+        <BottomBar />
+
+        {/* Global client components and scripts */}
         <ClientComponents />
         <Analytics />
         <SpeedInsights />
 
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${analytics.gaMeasurementId}`}
-        />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.gaMeasurementId}`} />
         <script
           id="google-analytics"
           dangerouslySetInnerHTML={{
@@ -115,5 +131,5 @@ export default function RootLayout({
         />
       </body>
     </html>
-  );
+  )
 }
