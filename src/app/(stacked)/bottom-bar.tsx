@@ -49,7 +49,7 @@ const BarItem = memo(({ href, label, Icon, isActive, showLabels }: BarItemProps)
         isActive
           ? "text-contrast-light dark:text-contrast-dark"
           : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark"
-      } ${showLabels ? "py-1" : "py-2"}`} // Adjusted padding
+      } ${showLabels ? "" : "py-2"}`} // Adjusted padding
     >
       {Icon && (
         <Icon
@@ -59,7 +59,7 @@ const BarItem = memo(({ href, label, Icon, isActive, showLabels }: BarItemProps)
         />
       )}
       {showLabels && (
-        <span className="text-[11px] leading-tight text-center mt-0.5">
+        <span className="text-[11px] leading-tight text-center mt-1">
           {label}
         </span>
       )}

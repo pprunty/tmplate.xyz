@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import BottomBar from './bottom-bar';
 import Sidebar from "./sidebar";
 import Header from "./header"; // <-- Import your new header
+import CTA from "@/app/_layout/cta";
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
@@ -84,12 +85,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Desktop Sidebar */}
         <Sidebar />
 
+  {/* Desktop-only CTA in top-right corner */}
+  <div className="hidden sm:block fixed top-4 right-4 z-[55]">
+    <CTA options={["auth"]} />
+  </div>
+
         {/* Header (always visible) */}
         <Header />
 
         {/* Main content area */}
-        <main className="relative min-h-screen">
-          <div className="min-h-full dark:bg-[#171717] border-0 border-[#262626] sm:border-2 sm:rounded-t-3xl p-6">
+        <main className="relative min-h-screen sm:px-4">
+          <div className="min-h-full dark:bg-[#171717] border-0 border-[#262626] sm:border sm:rounded-t-3xl p-6">
             {children}
           </div>
         </main>

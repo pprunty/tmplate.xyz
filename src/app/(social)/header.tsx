@@ -9,7 +9,7 @@ export default function Header() {
         top-0
         left-0
         w-full
-        z-50
+        z-[50]
         pt-2 pb-3
         sm:py-4
         flex
