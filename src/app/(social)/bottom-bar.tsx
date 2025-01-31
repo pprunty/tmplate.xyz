@@ -13,7 +13,7 @@ interface BottomBarProps {
 interface BarItemProps {
   href: string
   label: string
-  Icon: FC
+  Icon: React.ComponentType<{ className?: string; size?: number } & React.SVGProps<SVGSVGElement>>
   isActive: boolean
   showLabels: boolean
 }
@@ -58,6 +58,7 @@ const BottomBar: FC<BottomBarProps> = memo(function BottomBar({ showLabels = fal
 
 // Add display name for ESLint
 BottomBar.displayName = "BottomBar"
+BarItem.displayName = "BarItem"
 
 export default BottomBar
 
