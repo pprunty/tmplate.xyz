@@ -1,5 +1,5 @@
-import CTA from "@/app/_layout/cta";
-import Logo from "../logo";
+import CTA from "@/app/_layout/cta"
+import Logo from "../logo"
 
 export default function Header() {
   return (
@@ -21,21 +21,22 @@ export default function Header() {
         border-b dark:border-[#333] border-[#EAEAEA]
         sm:border-0
       "
-     >
-           <div className="relative w-full flex flex-col">
-             {/* Center Home on Desktop */}
-             <div className="hidden sm:flex w-full justify-center">
-               <h3 className="text-md font-semibold dark:text-white">Home</h3>
-             </div>
+    >
+      <div className="relative w-full flex flex-col">
+        {/* Center Home on Desktop */}
+        <div className="hidden sm:flex w-full justify-center">
+          <h3 className="text-md font-semibold dark:text-white">Home</h3>
+        </div>
 
-             {/* Logo + CTA on Mobile (Hidden on md+) */}
-             <div className="sm:hidden px-2 flex flex-col items-center w-full">
-               <Logo className="" /> {/* Centered logo */}
-               <div className="w-full">
-                 <CTA options={["auth"]} /> {/* Full-width CTA */}
-               </div>
-             </div>
-           </div>
-         </header>
-  );
+        {/* Logo + CTA on Mobile (Hidden on md+) */}
+        <div className="sm:hidden px-2 flex flex-col items-center w-full">
+          <Logo className="" /> {/* Centered logo */}
+          <div className="w-full">
+            <CTA options={["auth"]} /> {/* Full-width CTA */}
+          </div>
+        </div>
+      </div>
+    </header>
+  )
 }
+

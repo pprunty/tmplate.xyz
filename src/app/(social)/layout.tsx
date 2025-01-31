@@ -80,34 +80,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className="dark:text-gray-100 max-w-2xl m-auto relative">
+      <body className="dark:text-gray-100 max-w-2xl m-auto relative flex flex-col min-h-screen">
         {/* Desktop Sidebar */}
         <Sidebar />
 
-        {/* The container that holds CTA, main content, etc. */}
-        <div className="relative w-full h-screen flex flex-col">
-          {/* Header (always visible) */}
-          <Header />
+        {/* Header (always visible) */}
+        <Header />
 
-          {/* Main content area with fixed background and scrollable interior */}
-          <div className="flex-1 overflow-hidden">
-            <main
-              className="
-                h-full
-                overflow-y-auto
-                scrollbar-hide
-                dark:bg-[#171717]
-                border-0
-                border-[#262626]
-                sm:border-2
-                sm:rounded-t-3xl
-                p-6
-              "
-            >
-              {children}
-            </main>
+        {/* Main content area */}
+        <main className="flex-grow overflow-auto">
+          <div className="min-h-full dark:bg-[#171717] border-0 border-[#262626] sm:border-2 sm:rounded-t-3xl p-6">
+            {children}
           </div>
-        </div>
+        </main>
 
         {/* Mobile Bottom Bar */}
         <BottomBar />
