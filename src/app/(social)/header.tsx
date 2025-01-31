@@ -9,16 +9,14 @@ export default function Header() {
         left-0
         w-full
         z-50
-        py-2
+        py-4
         sm:py-4
         flex
         items-center
         justify-center
         dark:bg-[#171717]/50
         backdrop-blur-lg
-        bg-[#fcfcfc]/50
-        sm:dark:bg-[#0D0D0D]
-        sm:bg-[#fcfcfc]
+        sm:bg-primary-background-light/85 sm:dark:bg-[#171717]/85
         border-b dark:border-[#333] border-[#EAEAEA]
         sm:border-0
       "
