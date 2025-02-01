@@ -11,6 +11,7 @@ import BottomBar from './bottom-bar';
 import Sidebar from "./sidebar";
 import Header from "./header"; // <-- Import your new header
 import CTA from "@/app/_layout/cta";
+import { Suspense } from 'react';
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
@@ -106,10 +107,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "
             >
               {children}
+        {/* Mobile Bottom Bar */}
+        <Suspense fallback={null}>
+            <BottomBar />
+        </Suspense>
             </main>
 
-        {/* Mobile Bottom Bar */}
-        <BottomBar />
         </div>
 
         {/* Global client components and scripts */}

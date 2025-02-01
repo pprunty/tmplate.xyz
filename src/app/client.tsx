@@ -16,7 +16,7 @@ export default function ClientComponents() {
   return (
     <>
       <Suspense fallback={null}>
-        <ClientSideScrollRestorer />
+        {/*<ClientSideScrollRestorer /> */}
       </Suspense>
       <JsonLdScript />
     </>
