@@ -89,8 +89,8 @@ export default function RootLayout({
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className={`${inter.className} antialiased dark:text-gray-100`}>
-        <main className="p-6 pt-3 md:pt-6 min-h-screen">
+      <body className={`${inter.className} antialiased dark:text-gray-100 relative min-h-screen pb-[56px]`}>
+        <main className="p-6 pt-3 md:pt-6 relative min-h-screen z-0">
          <Header />
          {children}
          <BottomBar showLabels/>

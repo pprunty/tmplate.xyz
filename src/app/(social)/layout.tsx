@@ -81,7 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-<body className="max-w-2xl m-auto relative min-h-screen pb-[56px]">
+<body className="max-w-2xl m-auto relative min-h-screen pb-[56px] sm:pb-0">
         {/* Desktop Sidebar */}
         <Sidebar />
 
@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
 
         {/* Main content area */}
-        <main className="relative sm:px-4">
+        <main className="relative sm:px-4 z-0 min-h-screen">
           <div className="min-h-full dark:bg-[#171717] border-0 border-[#262626] sm:border sm:rounded-t-3xl p-6">
             {children}
           </div>

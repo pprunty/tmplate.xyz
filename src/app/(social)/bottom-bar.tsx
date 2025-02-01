@@ -46,7 +46,10 @@ const BottomBar: FC<BottomBarProps> = memo(function BottomBar({ showLabels = fal
   );
 
   return (
-    <nav className="block md:hidden fixed py-4 bottom-0 left-0 right-0 z-50 backdrop-blur-xl bg-primary-background-light/90 dark:bg-[#171717]/90">
+<nav
+  style={{ transform: "translate3d(0, 0, 0)" }}
+  className="block md:hidden fixed py-4 bottom-0 left-0 right-0 z-50 backdrop-blur-xl bg-primary-background-light/90 dark:bg-[#171717]/90"
+>
       <ul className="flex justify-around">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => (
           <BarItem
