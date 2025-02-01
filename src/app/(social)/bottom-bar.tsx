@@ -57,7 +57,7 @@ const BottomBar: FC<BottomBarProps> = memo(function BottomBar({ showLabels = fal
             href={href}
             label={label}
             Icon={Icon}
-            isActive={pathname.startsWith(href)}
+            isActive={pathname === href}
             showLabels={showLabels}
           />
         ))}

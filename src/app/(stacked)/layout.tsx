@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from './header';
 import BottomBar from './bottom-bar';
 import Footer from "../footer"; // Import your new Sidebar
+// import { Suspense } from 'react';
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
@@ -89,13 +90,13 @@ export default function RootLayout({
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className={`${inter.className} antialiased dark:text-gray-100 relative min-h-screen pb-[56px]`}>
-        <main className="p-6 pt-3 md:pt-6 relative min-h-screen z-0">
+      <body className={`${inter.className} antialiased`}>
+        <main className="p-6 pt-3 md:pt-6 relative z-0">
          <Header />
          {children}
-         <BottomBar showLabels/>
         </main>
          <Footer/>
+         <BottomBar showLabels/>
         <ClientComponents />
         <Analytics />
         <SpeedInsights />

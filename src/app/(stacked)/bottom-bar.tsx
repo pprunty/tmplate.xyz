@@ -9,20 +9,21 @@ import { routes } from "./routes";
 const BottomBar = memo(function BottomBar({ showLabels = false }: { showLabels?: boolean }) {
   const pathname = usePathname();
 
-  const bottomBarRoutes = useMemo(() => 
-    routes.filter((r) => r.showInLayouts?.includes("bottom-bar")),
-  [/* Add dependencies if routes are dynamic */]);
+  const bottomBarRoutes = useMemo(
+    () => routes.filter((r) => r.showInLayouts?.includes("bottom-bar")),
+    [] // add dependencies if routes are dynamic
+  );
 
   return (
-    <nav className="block md:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]">
+    <nav className="block md:hidden sticky bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]">
       <ul className="flex justify-around">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => (
-          <BarItem 
+          <BarItem
             key={href}
             href={href}
             label={label}
             Icon={Icon}
-            isActive={pathname.startsWith(href)}
+            isActive={pathname === href}
             showLabels={showLabels}
           />
         ))}
@@ -44,12 +45,11 @@ const BarItem = memo(({ href, label, Icon, isActive, showLabels }: BarItemProps)
   <li className="flex-1">
     <Link
       href={href}
-      aria-current={isActive ? "page" : undefined}
       className={`flex flex-col items-center justify-center w-full h-full px-2 ${
         isActive
           ? "text-contrast-light dark:text-contrast-dark"
           : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark"
-      } ${showLabels ? "" : "py-2"}`} // Adjusted padding
+      } ${showLabels ? "" : "py-2"}`}
     >
       {Icon && (
         <Icon
