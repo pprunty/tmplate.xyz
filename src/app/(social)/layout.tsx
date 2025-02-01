@@ -81,25 +81,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-<body className="max-w-2xl m-auto relative min-h-screen pb-[56px] sm:pb-0">
+      <body className="max-w-2xl m-auto sm:px-8">
         {/* Desktop Sidebar */}
+        <div className="">
         <Sidebar />
 
-  {/* Desktop-only CTA in top-right corner */}
-  <div className="hidden sm:block fixed top-4 right-4 z-[55]">
-    <CTA options={["auth"]} />
-  </div>
-
-        {/* Header (always visible) */}
-        <Header />
-
-        {/* Main content area */}
-        <main className="relative sm:px-4 z-0 min-h-screen">
-          <div className="min-h-full dark:bg-[#171717] border-0 border-[#262626] sm:border sm:rounded-t-3xl p-6">
-            {children}
+          <div className="hidden sm:block fixed top-4 right-4 z-[55]">
+            <CTA options={["auth"]} />
           </div>
-        </main>
+
+          <Header />
+
+          {/* Main content area with fixed background and scrollable interior */}
+            <main
+              className="
+              relative min-h-screen
+                relative z-0
+                dark:bg-[#171717]
+                border-0
+                border-[#262626]
+                sm:border
+                sm:rounded-t-3xl
+                p-6
+              "
+            >
+              {children}
+            </main>
+
+        {/* Mobile Bottom Bar */}
         <BottomBar />
+        </div>
 
         {/* Global client components and scripts */}
         <ClientComponents />
