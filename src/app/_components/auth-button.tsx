@@ -28,7 +28,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({ className = '', type = 'login' 
     <>
       <button
         onClick={handleOpenModal}
-        className={`px-3 py-2 sm:py-1.5 text-sm font-medium sm:font-normal sm:rounded-xl rounded-lg transition-colors w-full whitespace-nowrap ${
+        className={`px-3 py-2 text-xs sm:text-sm font-medium sm:font-normal rounded-lg transition-colors w-full whitespace-nowrap ${
           isSignup
             ? `bg-contrast-light dark:bg-contrast-dark text-primary-background-light dark:text-primary-background-dark hover:bg-contrast-hover-light dark:hover:bg-contrast-hover-dark active:bg-contrast-active-light dark:active:bg-contrast-active-dark`
             : `bg-primary-background-light dark:bg-primary-background-dark border border-primary-border-light text-primary-text-light
