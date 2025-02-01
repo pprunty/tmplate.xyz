@@ -14,7 +14,7 @@ const BottomBar = memo(function BottomBar({ showLabels = false }: { showLabels?:
   [/* Add dependencies if routes are dynamic */]);
 
   return (
-    <nav className="block md:hidden fixed py-2 bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]">
+    <nav className="block md:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-primary-background-light/80 dark:bg-primary-background-dark/80 border-t dark:border-[#333] border-[#EAEAEA]">
       <ul className="flex justify-around">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => (
           <BarItem 
