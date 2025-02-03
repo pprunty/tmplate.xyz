@@ -26,14 +26,15 @@ export default function Header() {
     "bg-primary-background-light/70 dark:bg-[#171717]/70",
     "border-b dark:border-[#333] border-[#EAEAEA]",
     "sm:border-0",
-    "transition-all duration-500 ease-in-out sm:transition-none",
+    "transition-all duration-500 ease-out", // Smoother timing function
     "py-2 sm:py-4",
   )
 
   const logoContainerClasses = clsx(
-    "transition-all duration-300 ease-in-out",
+    "transition-all duration-500 ease-out", // Increased duration and smoother timing
     "transform origin-top",
     "overflow-hidden",
+    "will-change-transform, will-change-opacity, will-change-max-height", // Optimize performance
     {
       "max-h-[100px] opacity-100 mb-2": isAtTop,
       "max-h-0 opacity-0 mb-0": !isAtTop,
@@ -61,4 +62,3 @@ export default function Header() {
     </header>
   )
 }
-
