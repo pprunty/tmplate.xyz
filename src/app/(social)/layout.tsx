@@ -82,57 +82,59 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className="max-w-2xl m-auto sm:px-8">
-        {/* Desktop Sidebar */}
-        <div className="">
-        <Sidebar />
+            <body className="max-w-2xl m-auto sm:px-6">
+              {/* Desktop Sidebar */}
+              <div className="sm:flex sm:h-screen sm:overflow-hidden">
+                <Sidebar />
 
-          <div className="hidden sm:block fixed top-4 right-4 z-[55]">
-            <CTA options={["auth"]} />
-          </div>
+                <div className="hidden sm:block fixed top-4 right-4 z-[55]">
+                  <CTA options={["auth"]} />
+                </div>
 
-          <Header />
+                <Header />
 
-          {/* Main content area with fixed background and scrollable interior */}
-            <main
-              className="
-              relative min-h-screen
-                relative z-0
-                dark:bg-[#171717]
-                border-0
-                border-[#262626]
-                sm:border
-                sm:rounded-t-3xl
-                p-6
-              "
-            >
-              {children}
-        {/* Mobile Bottom Bar */}
-        <Suspense fallback={null}>
-            <BottomBar />
-        </Suspense>
-            </main>
+                {/* Main content area with fixed background and scrollable interior */}
+                <main
+                  className="
+                    relative
+                    sm:flex-grow
+                    sm:overflow-auto
+                    sm:scrollbar-hide
+                    dark:bg-[#171717]
+                    border-0
+                    border-[#262626]
+                    sm:border
+                    sm:rounded-t-3xl
+                    p-6
+                    sm:mt-16
+                  "
+                >
+                  <div className="sm:min-h-[calc(100vh-4rem)]">{children}</div>
+                  {/* Mobile Bottom Bar */}
+                  <Suspense fallback={null}>
+                    <BottomBar />
+                  </Suspense>
+                </main>
+              </div>
 
-        </div>
+              {/* Global client components and scripts */}
+              <ClientComponents />
+              <Analytics />
+              <SpeedInsights />
 
-        {/* Global client components and scripts */}
-        <ClientComponents />
-        <Analytics />
-        <SpeedInsights />
-
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.gaMeasurementId}`} />
-        <script
-          id="google-analytics"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${analytics.gaMeasurementId}');
-            `,
-          }}
-        />
-      </body>
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.gaMeasurementId}`} />
+              <script
+                id="google-analytics"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${analytics.gaMeasurementId}');
+                  `,
+                }}
+              />
+            </body>
     </html>
   )
 }

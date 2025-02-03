@@ -22,7 +22,7 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
   const showBrandingClasses = show_brand_name ? "flex" : "inline-block"
 
   return (
-    <Link href={url || "/"}>
+    <Link href={url || "/"} className="z-[60]">
       <div className={`cursor-pointer ${className} ${showBrandingClasses} items-center space-x-2`}>
         {logo_svg_path ? (
           <Image

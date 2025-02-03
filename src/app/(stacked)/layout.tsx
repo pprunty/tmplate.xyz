@@ -90,9 +90,9 @@ export default function RootLayout({
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className={`${inter.className} antialiased`}>
-        <main className="p-6 pt-3 md:pt-6 relative z-0">
+      <body className={`${inter.className} antialiased m-auto`}>
          <Header />
+<main className="pt-[116px] sm:pt-14 px-6 min-h-screen relative z-0">
          {children}
         </main>
          <Footer/>
