@@ -1,5 +1,4 @@
-import { Search, User, Settings, ShoppingBag, Users, Percent, FileText } from "lucide-react";
-import HomeIcon from "./components/HomeIcon";
+import { Home, Search, User, Settings, ShoppingBag, Users, Percent, FileText } from "lucide-react";
 
 export interface Route {
   href: string;
@@ -26,10 +25,10 @@ const addPrefixToRoutes = (routes: Route[], prefix: string): Route[] => {
 // Base routes (without prefix)
 const baseRoutes: Route[] = [
   {
-    href: "/",
+    href: '/',
     translationKey: "home",
     label: "Home",
-    icon: HomeIcon,
+    icon: Home,
     showInLayouts: ['admin', 'stacked', 'bottom-bar', 'sidebar'],
   },
   {
