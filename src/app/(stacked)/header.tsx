@@ -10,10 +10,8 @@ import CTA, { type CTAOption } from "@/app/_layout/cta"
 
 export default function Header() {
   const pathname = usePathname()
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [isScrollingDown, setIsScrollingDown] = useState(false)
   const [isTopRowVisible, setIsTopRowVisible] = useState(true)
-  const showTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const carouselRef = useRef<HTMLDivElement | null>(null)
 
   const stackedRoutes = routes.filter((route) => route.showInLayouts?.includes("stacked"))
@@ -37,25 +35,13 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      setIsScrollingDown(currentScrollY > lastScrollY && currentScrollY > 50)
+      setIsTopRowVisible(currentScrollY <= lastScrollY || currentScrollY <= 0)
       setLastScrollY(currentScrollY)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [lastScrollY])
-
-  useEffect(() => {
-    if (isScrollingDown) {
-      setIsTopRowVisible(false)
-    } else {
-      if (showTimeoutRef.current) clearTimeout(showTimeoutRef.current)
-      showTimeoutRef.current = setTimeout(() => setIsTopRowVisible(true), 300)
-    }
-    return () => {
-      if (showTimeoutRef.current) clearTimeout(showTimeoutRef.current)
-    }
-  }, [isScrollingDown])
 
   const renderRoutes = (routesToRender: typeof routes) => (
     <ul className="flex space-x-2 pb-3 sm:pb-3 pt-2 sm:pt-2">
@@ -97,11 +83,11 @@ export default function Header() {
   return (
     <nav className="backdrop-blur-lg bg-primary-background-light/85 dark:bg-primary-background-dark/85 text-white dark:text-[#888] fixed top-0 left-0 w-full z-50 border-b dark:border-[#333] border-[#EAEAEA]">
       <div className="max-w-screen-2xl mx-auto sm:px-2">
-        {/* Top row (collapses on scroll) */}
+        {/* Top row (visible when scrolling up or at the top) */}
         <div
           className={clsx(
-            "overflow-hidden transition-all duration-300",
-            isTopRowVisible ? "h-14 sm:h-12 opacity-100" : "h-0 opacity-0",
+            "overflow-hidden transition-all duration-300 ease-in-out",
+            isTopRowVisible ? "max-h-14 sm:max-h-12 opacity-100" : "max-h-0 opacity-0",
           )}
         >
           <div className="flex items-center justify-between h-14 sm:h-12 px-4 pt-5 pb-2">
@@ -118,7 +104,13 @@ export default function Header() {
         </div>
 
         {/* Nav links (desktop and mobile) */}
-        <div ref={carouselRef} className="overflow-x-auto px-4 whitespace-nowrap scrollbar-hide">
+        <div
+          ref={carouselRef}
+          className={clsx(
+            "overflow-x-auto px-4 whitespace-nowrap scrollbar-hide transition-all duration-300 ease-in-out",
+            isTopRowVisible ? "" : "pt-2",
+          )}
+        >
           {renderRoutes(stackedRoutes)}
         </div>
       </div>
