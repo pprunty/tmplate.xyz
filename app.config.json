@@ -5,14 +5,17 @@
     "show_footer": true,
     "show_cta": true,
     "desktop": {
-      "show_cta": true,
+      "show_cta": false,
       "show_footer": true,
       "show_branding": true,
-      "type": "HeaderAndFooter",
+      "type": "StandardHeader",
+      "variation": "sticky",
       "header": {
-        "variation": "blur",
         "cta": {
-          "options": ["auth", "notifications", "shopping_cart"]
+          "options": [
+            "auth",
+            "notifications"
+          ]
         }
       },
       "branding": {
@@ -21,34 +24,51 @@
     },
     "mobile": {
       "type": "BottomBar",
+      "variation": "blur",
       "header": {
         "variation": "blur"
       },
       "cta": {
-        "options": ["auth", "search", "notifications"]
+        "options": [
+          "auth",
+          "notifications"
+        ]
       },
       "show_footer": true,
-      "show_branding": true
+      "show_branding": true,
+      "show_cta": false
     },
     "header": {
       "variation": "linear-opacity"
     },
     "cta": {
-      "options": ["auth", "notifications", "shopping_cart"]
+      "options": [
+        "auth",
+        "notifications",
+        "shopping_cart"
+      ]
     },
     "footer": {
       "show_social_icons": true,
-      "newsletter": true
+      "newsletter": true,
+      "logo": "/assets/images/dice.gif",
+      "mobile_app": {
+        "show_ios": true,
+        "ios_url": "https://apps.apple.com/app/id123456789",
+        "show_android": false,
+        "android_url": "https://play.google.com/store/apps/details?id=com.example.app"
+      }
     },
     "branding": {
-      "logo_svg_path": "/icon.svg",
+      "logo_svg_path": null,
       "show_brand_name": false,
       "url": "/",
       "brand_name": {
         "name": "[tmp]",
         "font_family": "monospace",
         "font_weight": "200"
-      }
+      },
+      "company_type": "Corp."
     }
   },
   "routing": {
@@ -80,14 +100,14 @@
       "minimalistic"
     ],
     "socials": {
-      "twitter": "https://patrickprunty.com",
+      "twitter": "https://x.com/pprunty_",
       "strava": "https://www.strava.com/athletes/72636452",
-      "github": "https://github.com/pprunty/blog.v2",
-      "linkedin": "",
+      "github": "https://github.com/pprunty",
+      "linkedin": "https://www.linkedin.com/in/patrickprunty/",
       "reddit": "",
-      "tiktok": "https://patrickprunty.com",
-      "instagram": "",
-      "youtube": "https://patrickprunty.com",
+      "tiktok": "",
+      "instagram": "https://www.instagram.com/pprunty97/",
+      "youtube": "https://www.youtube.com/@patrickprunty?sub_confirmation=1",
       "email": ""
     },
     "blog": {

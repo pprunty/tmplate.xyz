@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { SITE_URL } from '@/config'; // Adjust the path based on your project structure
+import config from './config'; // Adjust the path based on your project structure
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: `${config.productionUrl}/sitemap.xml`,
   };
 }
