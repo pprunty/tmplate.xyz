@@ -43,8 +43,8 @@ export default function BasicLayout({ children }: { children: React.ReactNode })
           Add top padding (or margin) to the main container.
           Adjust "pt-16" (4rem) as needed to match your header's height.
         */}
-        <main className="mx-auto max-w-screen-xl sm:px-4 px-2 pt-16">
-          <div className="min-h-screen py-6">
+        <main className="mx-auto max-w-screen-xl pt-16">
+          <div className="min-h-screen p-6">
             {children}
           </div>
         </main>

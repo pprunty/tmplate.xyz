@@ -40,7 +40,7 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             // Apply the same responsive sizing classes for the SVG
-            className="w-8 h-8 md:w-10 md:h-10 fill-current text-black dark:text-white"
+            className="w-10 h-10 fill-current text-black dark:text-white"
             width={26}
             height={26}
             viewBox="0 0 300.000000 300.000000"

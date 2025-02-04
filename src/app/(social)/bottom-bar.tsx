@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { routes } from "./routes";
 import type { FC } from "react";
+import clsx from "clsx"; // Import clsx for conditional classes
 
-// Define prop types
 interface BarItemProps {
   href: string;
   label: string;
@@ -15,41 +15,57 @@ interface BarItemProps {
   showLabels: boolean;
 }
 
-// BarItem Component (Memoized)
-const BarItem: FC<BarItemProps> = memo(({ href, label, Icon, isActive, showLabels }) => {
-  return (
-    <Link href={href} className="flex flex-col items-center">
-      {Icon && <Icon className={`h-6 w-6 my-2 ${isActive ? "text-primary-text" : "text-gray-400 dark:text-gray-600"}`} />}
-      {showLabels && (
-        <span className={`mt-1 text-xs ${isActive ? "text-primary-text" : "text-gray-400 dark:text-gray-600"}`}>
-          {label}
-        </span>
+const BarItem = memo(({ href, label, Icon, isActive, showLabels }: BarItemProps) => (
+  <li className="flex-1">
+    <Link
+      href={href}
+      className={clsx(
+        "flex flex-col items-center justify-center w-full h-full px-2",
+        isActive
+          ? "text-contrast-light dark:text-contrast-dark"
+          : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark",
+        showLabels ? "py-2" : "py-2"
       )}
+    >
+      {/* Wrap both the icon and label in a container to animate together */}
+      <div
+        className={clsx(
+          "flex flex-col items-center",
+          isActive ? "animate-scalePulse" : "scale-100"
+        )}
+      >
+        {Icon && (
+          <Icon className="w-6 h-6" />
+        )}
+        {showLabels && (
+          <span className="text-[11px] pb-1 pt-2 leading-tight text-center">
+            {label}
+          </span>
+        )}
+      </div>
     </Link>
-  );
-});
+  </li>
+));
 
-// Add display name for ESLint
 BarItem.displayName = "BarItem";
 
 interface BottomBarProps {
   showLabels?: boolean;
 }
 
-// BottomBar Component (Memoized)
 const BottomBar: FC<BottomBarProps> = memo(function BottomBar({ showLabels = false }) {
   const pathname = usePathname();
 
   const bottomBarRoutes = useMemo(
     () => routes.filter((r) => r.showInLayouts?.includes("bottom-bar")),
-    [],
+    []
   );
 
   return (
-<nav
-  style={{ transform: "translate3d(0, 0, 0)" }}
-  className="block md:hidden fixed py-4 bottom-0 left-0 right-0 z-50 backdrop-blur-xl bg-primary-background-light/90 dark:bg-[#171717]/90"
->
+    <nav
+      style={{ transform: "translate3d(0, 0, 0)" }}
+      className="block md:hidden fixed py-4 bottom-0 left-0 right-0 z-50 backdrop-blur-xl bg-primary-background-light/90 dark:bg-[#171717]/90"
+    >
       <ul className="flex justify-around">
         {bottomBarRoutes.map(({ href, label, icon: Icon }) => (
           <BarItem
@@ -66,7 +82,6 @@ const BottomBar: FC<BottomBarProps> = memo(function BottomBar({ showLabels = fal
   );
 });
 
-// Add display name for ESLint
 BottomBar.displayName = "BottomBar";
 
 export default BottomBar;

@@ -95,8 +95,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* 3) Main content scrolls */}
           <div className="flex-1 flex flex-col overflow-auto">
             <Header />
-            <main className="p-6 pt-3 md:pt-6 flex-1">
-              {children}
+            <main className="p-14 pt-3 md:pt-6 flex-1">
+              <div className="bg-white dark:bg-[#111] rounded-lg p-6 shadow-sm border border-gray-200 dark:border-[#252525]">
+                {children}
+              </div>
             </main>
             <Footer />
           </div>

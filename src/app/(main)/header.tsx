@@ -62,7 +62,7 @@ export default function Header({
       )}
     >
       {/* Constrain header inner content with a max-width */}
-      <div className="mx-auto max-w-screen-2xl sm:px-4 px-2">
+      <div className="mx-auto max-w-screen-2xl sm:px-6 px-2">
         <div className="flex items-center justify-between py-0 xl:py-3">
           {/* Left section with logo and desktop navigation */}
           <div className="flex items-center gap-8">

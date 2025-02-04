@@ -92,7 +92,7 @@ export default function RootLayout({
 
       <body className={`${inter.className} antialiased m-auto`}>
          <Header />
-        <main className="pt-[116px] mx-auto max-w-screen-2xl sm:px-4 px-4 pt-16 min-h-screen relative z-0">
+        <main className="pt-[116px] sm:mx-auto max-w-screen-2xl px-6 pt-16 min-h-screen relative z-0">
          {children}
         </main>
          <Footer/>

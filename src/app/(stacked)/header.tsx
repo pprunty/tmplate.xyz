@@ -90,7 +90,7 @@ export default function Header() {
             isTopRowVisible ? "max-h-14 sm:max-h-12 opacity-100" : "max-h-0 opacity-0",
           )}
         >
-          <div className="flex items-center justify-between h-14 sm:h-12 px-4 pt-5 pb-2">
+          <div className="flex items-center justify-between h-14 sm:h-12 sm:px-4 px-0.5 pt-5 pb-2">
             {/* Left: Logo */}
             <div className="flex-shrink-0">
               <Logo className="h-8 w-auto sm:h-10" />
@@ -107,8 +107,7 @@ export default function Header() {
         <div
           ref={carouselRef}
           className={clsx(
-            "overflow-x-auto px-4 whitespace-nowrap scrollbar-hide transition-all duration-300 ease-in-out",
-            isTopRowVisible ? "" : "pt-2",
+            "overflow-x-auto sm:px-4 px-0.5 whitespace-nowrap scrollbar-hide transition-all duration-300 ease-in-out"
           )}
         >
           {renderRoutes(stackedRoutes)}
