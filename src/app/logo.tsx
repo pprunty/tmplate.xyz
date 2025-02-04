@@ -23,22 +23,26 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
 
   return (
     <Link href={url || "/"} className="z-[60]">
-      <div className={`cursor-pointer ${className} ${showBrandingClasses} items-center space-x-2`}>
+      <div className={`cursor-pointer ${className} ${showBrandingClasses} items-center`}>
         {logo_svg_path ? (
           <Image
             src={logo_svg_path || "/placeholder.svg"}
             alt={`${name} logo`}
-            width={32}
-            height={32}
-            className="w-8 h-8 sm:w-8 sm:h-8 fill-current text-black dark:text-white"
+            // Use the mobile dimensions for the intrinsic image size
+            width={26}
+            height={26}
+            // Tailwind responsive classes:
+            // Mobile: w-8 h-8, Desktop (md breakpoint and above): w-10 h-10
+            className="w-8 h-8 md:w-10 md:h-10 fill-current text-black dark:text-white"
             priority
           />
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-10 h-10 sm:w-11 sm:h-11 fill-current text-black dark:text-white"
-            width="32"
-            height="32"
+            // Apply the same responsive sizing classes for the SVG
+            className="w-8 h-8 md:w-10 md:h-10 fill-current text-black dark:text-white"
+            width={26}
+            height={26}
             viewBox="0 0 300.000000 300.000000"
             preserveAspectRatio="xMidYMid meet"
           >
@@ -50,7 +54,11 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
         )}
 
         {show_brand_name && (
-          <span className="text-base sm:text-base" style={{ fontFamily: font_family, fontWeight: font_weight }}>
+          <span
+            // Mobile text size: text-base, Desktop: text-lg
+            className="text-base md:text-lg"
+            style={{ fontFamily: font_family, fontWeight: font_weight }}
+          >
             {name}
           </span>
         )}
@@ -60,4 +68,3 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
 }
 
 export default Logo
-

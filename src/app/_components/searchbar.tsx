@@ -48,7 +48,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <Input
             placeholder={placeholder}
             className="hidden sm:flex min-w-[300px] text-secondary-text-light dark:text-secondary-text-dark"
-            icon={<Search className="h-5 w-5 text-secondary-text-light dark:text-secondary-text-dark" />}
+            icon={<Search className="h-4 w-4 text-secondary-text-light dark:text-secondary-text-dark" />}
           />
         )}
         {variation === 'full' && (
@@ -75,12 +75,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onClick={() => setIsOpen(true)}
           aria-label="Open Search"
         >
-          <Search className="h-5 w-5 sm:h-6 sm:w-6 text-gray-800 dark:text-gray-300" />
+          <Search className="h-5 w-5 sm:h-5 sm:w-5 text-gray-800 dark:text-gray-300" />
         </button>
       </div>
 
       {/* Modal triggered by pressing ⌘+K, Ctrl+K, or clicking the mobile icon */}
-      <Modal isOpen={isOpen} onClose={onClose} size="lg" variation="blur">
+      <Modal isOpen={isOpen} onClose={onClose} title={"Search"} size="lg" variation={"mobileSlide"}>
         <div className="p-4 text-secondary-text-light dark:text-secondary-text-dark">
           {/* Enhanced search or command palette content goes here */}
           <p>This is where your enhanced search or command palette content goes.</p>

@@ -2,9 +2,10 @@
 
 import React from "react";
 import AuthButton from "@/app/_components/auth-button";
+import SearchBar from "@/app/_components/searchbar"; // Adjust the import path as needed
 
-// Define the CTAOption type
-export type CTAOption = "auth" | "notifications" | "shopping_cart";
+// Define the CTAOption type with only "auth" and "search"
+export type CTAOption = "auth" | "search";
 
 interface CTAProps {
   options?: CTAOption[];
@@ -13,30 +14,23 @@ interface CTAProps {
 export default function CTA({ options = [] }: CTAProps) {
   return (
     <div className="flex items-center space-x-2">
-      {options.includes("auth") && (
-        <>
-          <AuthButton type="login" />
-          <AuthButton type="signup" />
-        </>
-      )}
-
-      {options.includes("notifications") && (
-        <button
-          className="p-2 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded"
-          aria-label="Notifications"
-        >
-          🔔
-        </button>
-      )}
-
-      {options.includes("shopping_cart") && (
-        <button
-          className="p-2 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded"
-          aria-label="Shopping Cart"
-        >
-          🛒
-        </button>
-      )}
+      {options.map((option, index) => {
+        switch (option) {
+          case "auth":
+            return (
+              <React.Fragment key={`auth-${index}`}>
+                <AuthButton type="login" />
+                <AuthButton type="signup" />
+              </React.Fragment>
+            );
+          case "search":
+            return (
+              <SearchBar key={`search-${index}`} variation="input" />
+            );
+          default:
+            return null;
+        }
+      })}
     </div>
   );
 }

@@ -36,15 +36,21 @@ export function SocialIcon({ platform, className = '' }: SocialIconProps) {
     width: '18', // Default width for non-mobile
     height: '18', // Default height for non-mobile
     className: `
-      ${className} // Use the passed className
+      ${className}
 
-      text-contrast-light dark:text-contrast-dark
+  cursor-pointer
 
-      // Hover color
-      hover:text-contrast-hover-light dark:hover:text-contrast-hover-dark
+  // Default text color in light/dark mode
+  text-[#5B5B5B] dark:text-[#888]
 
-      // Active color
-      active:text-contrast-active-light dark:active:text-contrast-active-dark
+  // Transition for hover/active states
+  transition-colors duration-200
+
+  // Hover states for light/dark mode
+  hover:text-black dark:hover:text-white
+
+  // Press state
+  active:text-black active:hover:text-white
 
       transition-colors
       w-5 h-5
@@ -54,8 +60,6 @@ export function SocialIcon({ platform, className = '' }: SocialIconProps) {
     'aria-label': `${platform} profile`, // Accessibility label
     role: 'link', // Optional role attribute
   };
-
-
     switch (platform) {
       case 'github':
         return (

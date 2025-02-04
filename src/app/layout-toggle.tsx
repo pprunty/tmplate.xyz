@@ -10,18 +10,33 @@ const layoutOptions = [
   { label: "Stacked", value: "/stacked" },
 ];
 
-export default function LayoutToggle() {
+function LayoutToggle() {
   const router = useRouter();
   const pathname = usePathname();
-  const [selectedLayout, setSelectedLayout] = useState<string>("/");
+  const [selectedLayout, setSelectedLayout] = useState<string | null>(null);
 
-  // Update selected layout based on current pathname
   useEffect(() => {
-    const currentLayout = layoutOptions.find(option => pathname.startsWith(option.value));
+    // Pick the option with the longest matching value
+    const currentLayout = layoutOptions.reduce<{ label: string; value: string } | null>(
+      (matched, option) => {
+        if (
+          pathname.startsWith(option.value) &&
+          option.value.length > (matched?.value.length || 0)
+        ) {
+          return option;
+        }
+        return matched;
+      },
+      null
+    );
     setSelectedLayout(currentLayout ? currentLayout.value : "/");
   }, [pathname]);
 
-  // Handle navigation when user selects a different layout
+  // Until the layout is determined, render nothing
+  if (selectedLayout === null) {
+    return null;
+  }
+
   const handleLayoutChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLayout = event.target.value;
     setSelectedLayout(newLayout);
@@ -47,4 +62,15 @@ export default function LayoutToggle() {
       </select>
     </div>
   );
+}
+
+export default function LayoutToggleWrapper() {
+  // Prevent rendering until after mount to avoid mismatches during hydration
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+  return <LayoutToggle />;
 }

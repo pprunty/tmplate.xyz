@@ -4,6 +4,7 @@
 import React, { useMemo, memo } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import clsx from "clsx"; // Import clsx for conditional classes
 import { routes } from "./routes";
 
 const BottomBar = memo(function BottomBar({ showLabels = false }: { showLabels?: boolean }) {
@@ -45,24 +46,30 @@ const BarItem = memo(({ href, label, Icon, isActive, showLabels }: BarItemProps)
   <li className="flex-1">
     <Link
       href={href}
-      className={`flex flex-col items-center justify-center w-full h-full px-2 ${
+      className={clsx(
+        "flex flex-col items-center justify-center w-full h-full px-2",
         isActive
           ? "text-contrast-light dark:text-contrast-dark"
-          : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark"
-      } ${showLabels ? "py-2" : "py-2"}`}
+          : "text-secondary-text-light dark:text-secondary-text-dark hover:text-secondary-text-hover-light dark:hover:text-secondary-text-hover-dark",
+        showLabels ? "py-2" : "py-2"
+      )}
     >
-      {Icon && (
-        <Icon
-          className={`w-6 h-6 ${
-            isActive ? "scale-110" : "scale-100"
-          } transition-transform duration-500 ease-in-out`}
-        />
-      )}
-      {showLabels && (
-        <span className="text-[11px] pb-1 pt-2 leading-tight text-center">
-          {label}
-        </span>
-      )}
+      {/* Wrap both the icon and label in a container to animate together */}
+      <div
+        className={clsx(
+          "flex flex-col items-center",
+          isActive ? "animate-scalePulse" : "scale-100"
+        )}
+      >
+        {Icon && (
+          <Icon className="w-6 h-6" />
+        )}
+        {showLabels && (
+          <span className="text-[11px] pb-1 pt-2 leading-tight text-center">
+            {label}
+          </span>
+        )}
+      </div>
     </Link>
   </li>
 ));

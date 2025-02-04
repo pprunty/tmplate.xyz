@@ -69,17 +69,17 @@ const config: Config = {
           light: "#000000",
           dark: "#FFFFFF",
           hover: {
-            light: "#333333", // Hover for contrast in light mode
-            dark: "#CCCCCC", // Hover for contrast in dark mode
+            light: "#333333",
+            dark: "#CCCCCC",
           },
           active: {
-            light: "#1A1A1A", // Active for contrast in light mode
-            dark: "#E6E6E6", // Active for contrast in dark mode
+            light: "#1A1A1A",
+            dark: "#E6E6E6",
           },
         },
         highlight: {
-          light: "#DC70FF", // Pink/Purple shade for light mode
-          dark: "#B065E9", // Slightly darker shade for dark mode
+          light: "#DC70FF",
+          dark: "#B065E9",
         },
       },
       keyframes: {
@@ -91,10 +91,22 @@ const config: Config = {
           "0%": { opacity: "1", transform: "scale(1)" },
           "100%": { opacity: "0", transform: "scale(0.95)" },
         },
+        slideUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        scalePulse: {
+                  '0%': { transform: 'scale(1)' },
+                  '30%': { transform: 'scale(0.9)' },
+                  '70%': { transform: 'scale(0.9)' },
+                  '100%': { transform: 'scale(1)' },
+                },
       },
       animation: {
         modalShow: "modalShow 0.3s ease-out forwards",
         modalHide: "modalHide 0.3s ease-out forwards",
+        slideUp: "slideUp 0.25s ease-out forwards", // Updated duration here
+        scalePulse: 'scalePulse 300ms ease-in-out',
       },
     },
   },

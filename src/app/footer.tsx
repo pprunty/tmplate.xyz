@@ -3,58 +3,41 @@
 import React from 'react';
 import Image from 'next/image';
 import { ThemeSwitcher } from "@/app/_components/theme-switcher";
-
-// Assuming you have these two in the same file or as separate modules
-// import { SocialPlatform } from '@/types/SocialPlatform';
 import { urlMapping, SocialIcon } from '@/app/_components/social-icon';
-import config from '@/app/config'; // <— import your config here
-// If you have a "Subscribe" component, import that, too
-// import Subscribe from '@/app/_components/subscribe';
+import config from '@/app/config';
 
 export default function Footer() {
-  // 1) Destructure the footer config
   const {
     show_social_icons,
     newsletter,
     logo,
     mobile_app,
-    show_footer
+    show_footer,
   } = config.footer;
 
   if (!show_footer) {
-  return null;
+    return null;
   }
 
-  // 2) Grab brand name & company type from branding config
   const brandName = config.branding.brand_name.name;
   const companyType = config.branding.company_type;
 
   return (
     <footer
-      className={`
+      className="
         text-secondary-text-light dark:text-secondary-text-dark
-        border-t
-        justify-center
-        border-primary-border-light dark:border-primary-border-dark
+        border-t border-primary-border-light dark:border-primary-border-dark
         pt-6 pb-12
-      `}
-      style={{
-        marginTop: '5vw',
-      }}
+      "
+      style={{ marginTop: '5vw' }}
     >
-      <div className="max-w-screen-xl p-6 sm:px-8 w-full sm:px-6 py-10">
+      {/* Constrain and center the content */}
+      <div className="mx-auto max-w-screen-xl w-full px-6 xl:px-0 py-10">
         <div
           className="
-            grid
-            gap-y-6
-            gap-x-12
-            sm:gap-x-8
-            lg:gap-x-6
-            grid-cols-2
-            sm:grid-cols-2
-            md:grid-cols-3
-            lg:grid-cols-4
-            xl:grid-cols-5
+            grid gap-y-6 gap-x-12
+            sm:gap-x-8 lg:gap-x-6
+            grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
           "
         >
           {/* Column 1: Logo and Social Links */}
@@ -197,14 +180,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 5: Newsletter (Subscribe form?) */}
+          {/* Column 5: Newsletter */}
           {newsletter && (
             <div>
               <h3 className="font-semibold mb-2 text-sm text-primary-text-light dark:text-primary-text-dark">
                 Newsletter
               </h3>
-              {/* Example: <Subscribe title="Newsletter" /> */}
-              {/* If you have your own subscribe form, place it here. */}
+              {/* Place your subscribe form here */}
             </div>
           )}
 
@@ -246,7 +228,7 @@ export default function Footer() {
             </div>
           )}
         </div>
-      <ThemeSwitcher/>
+        <ThemeSwitcher />
       </div>
     </footer>
   );

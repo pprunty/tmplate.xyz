@@ -53,21 +53,21 @@ const OTPInput: React.FC<OTPInputProps> = ({
     const newErrors = [...errors];
     if (newValue === '') {
       newErrors[index] = false;
-       if (setFieldError) {
-            setFieldError("otp", "");
-          }
+      if (setFieldError) {
+        setFieldError("otp", "");
+      }
     } else {
       const isValid = isValidInput(newValue, inputType);
       if (!isValid) {
-if (setFieldError) {
-        setFieldError("otp", `invalid character '${newValue}'. only numeric values allowed`);
-      }
-              newErrors[index] = true;
+        if (setFieldError) {
+          setFieldError("otp", `invalid character '${newValue}'. only numeric values allowed`);
+        }
+        newErrors[index] = true;
       } else {
-if (setFieldError) {
-        setFieldError("otp", "");
-      }
-              newErrors[index] = false;
+        if (setFieldError) {
+          setFieldError("otp", "");
+        }
+        newErrors[index] = false;
       }
     }
     setErrors(newErrors);
@@ -95,8 +95,7 @@ if (setFieldError) {
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     onBlur(e);
-    if (setFieldTouched)
-    setFieldTouched(name, true);
+    if (setFieldTouched) setFieldTouched(name, true);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
@@ -146,7 +145,10 @@ if (setFieldError) {
             onBlur={handleBlur}
             onKeyDown={e => handleKeyDown(e, index)}
             ref={el => { inputRefs.current[index] = el; }}
-            className={`flex-grow w-full max-w-[4rem] h-8 sm:h-12 text-center text-xl font-mono border rounded focus:outline-none
+            className={`
+              flex-grow w-full max-w-[4rem]
+              h-14 sm:h-13
+              text-center text-xl font-mono border rounded focus:outline-none
               ${errors[index] ? 'border-red-500 animate-shake' : 'border-primary-border-light dark:border-primary-border-dark'}
               ${disabled ? 'bg-secondary-background-light dark:bg-secondary-background-dark' : 'bg-primary-background-light dark:bg-primary-background-dark'}
               ${errors[index] ? 'focus:ring-red-500 focus:border-red-500' : 'focus:ring-contrast-light focus:border-contrast-light dark:focus:ring-contrast-dark dark:focus:border-contrast-dark'}
@@ -161,7 +163,10 @@ if (setFieldError) {
   );
 };
 
-const isValidInput = (value: string, inputType: 'alphanumeric' | 'alphabetic' | 'numeric'): boolean => {
+const isValidInput = (
+  value: string,
+  inputType: 'alphanumeric' | 'alphabetic' | 'numeric'
+): boolean => {
   const regexMap = {
     alphanumeric: /^[a-z0-9]$/i,
     alphabetic: /^[a-z]$/i,

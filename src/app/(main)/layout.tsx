@@ -9,6 +9,7 @@ import { Analytics } from "../analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from "./header";
 import { doge } from "../doge";
+import Footer from "../footer"; // Import your new Sidebar
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,7 +27,6 @@ export const viewport: Viewport = {
 export const metadata: Metadata = { /* same as your example */ };
 
 export default function BasicLayout({ children }: { children: React.ReactNode }) {
-
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} font-sans antialiased`}>
       <head>
@@ -38,18 +38,21 @@ export default function BasicLayout({ children }: { children: React.ReactNode })
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
       <body className="">
-        <Header />
-        
-        <main className="m-auto sm:px-6 pt-16 sm:pt-20"> {/* Add padding for fixed header */}
-          <div className="sm:min-h-[calc(100vh-4rem)] p-6">
+        <Header scrollResponsive mobileResponsive />
+        {/*
+          Add top padding (or margin) to the main container.
+          Adjust "pt-16" (4rem) as needed to match your header's height.
+        */}
+        <main className="mx-auto max-w-screen-2xl sm:px-4 px-2 pt-16">
+          <div className="min-h-screen py-6">
             {children}
           </div>
         </main>
-
+        <Footer />
         <ClientComponents />
         <Analytics />
         <SpeedInsights />
       </body>
     </html>
-  )
+  );
 }
