@@ -62,14 +62,14 @@ export default function Footer() {
 
             {/* Social Icons */}
             {show_social_icons && (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
                 {(
                   [
                     'github',
                     'twitter',
+                    'instagram',
                     'youtube',
                     'linkedin',
-                    'instagram',
                     'tiktok',
                   ] as const
                 ).map((platform) =>
