@@ -1,6 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const CustomHomeIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ className, ...props }) => {
+const CustomHomeIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
+  className,
+  ...props
+}) => {
   return (
     <svg
       aria-label="Home"

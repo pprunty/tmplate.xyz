@@ -1,24 +1,29 @@
 // app/_components/sheet.tsx
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface SheetProps {
   isOpen: boolean;
   onClose: () => void;
-  side?: "left" | "right";
+  side?: 'left' | 'right';
   children: React.ReactNode;
 }
 
-export function Sheet({ isOpen, onClose, side = "left", children }: SheetProps) {
+export function Sheet({
+  isOpen,
+  onClose,
+  side = 'left',
+  children,
+}: SheetProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === 'Escape') onClose();
     };
 
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
   }, [onClose]);
 
   if (!isOpen) return null;
@@ -34,17 +39,17 @@ export function Sheet({ isOpen, onClose, side = "left", children }: SheetProps) 
       {/* Content */}
       <div
         className={`
-          fixed top-0 ${side === "left" ? "left-0" : "right-0"}
+          fixed top-0 ${side === 'left' ? 'left-0' : 'right-0'}
           h-full w-[280px] bg-white dark:bg-[#111]
           shadow-xl transition-transform duration-300
-          border-r ${side === "left" ? "border-r" : "border-l"}
+          border-r ${side === 'left' ? 'border-r' : 'border-l'}
           border-gray-200 dark:border-[#252525]
         `}
       >
         {children}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
 

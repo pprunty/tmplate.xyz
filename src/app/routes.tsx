@@ -1,10 +1,21 @@
-import { Home, Search, User, Settings, ShoppingBag, Users, Percent, FileText } from 'lucide-react';
+import {
+  Home,
+  Search,
+  User,
+  Settings,
+  ShoppingBag,
+  Users,
+  Percent,
+  FileText,
+} from 'lucide-react';
 
 export interface Route {
   href: string;
   translationKey: string;
   label: string;
-icon?: React.ComponentType<{ className?: string; size?: number } & React.SVGProps<SVGSVGElement>>;
+  icon?: React.ComponentType<
+    { className?: string; size?: number } & React.SVGProps<SVGSVGElement>
+  >;
   role?: string[]; // Roles allowed to view this route (e.g., ['admin', 'user'])
   showInLayouts?: string[]; // Layouts where this route is visible (e.g., ['stacked', 'admin'])
   children?: Route[]; // Sub-routes for nested navigation
@@ -80,13 +91,13 @@ export const routes: Route[] = [
     showInLayouts: ['admin'],
     role: ['admin'],
   },
-      {
-        href: '/search',
-        translationKey: 'search',
-        label: 'Search',
-        icon: Search,
-        showInLayouts: ['stacked', 'admin', 'bottom-bar'],
-      },
+  {
+    href: '/search',
+    translationKey: 'search',
+    label: 'Search',
+    icon: Search,
+    showInLayouts: ['stacked', 'admin', 'bottom-bar'],
+  },
   {
     href: '/discounts',
     translationKey: 'discounts',

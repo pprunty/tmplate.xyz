@@ -1,15 +1,15 @@
-import "../globals.css";
-import { themeEffect } from "@/app/_components/theme-effect";
-import { doge } from "../doge";
-import { Inter } from "next/font/google";
-import type { Metadata, Viewport } from "next";
-import ClientComponents from "../client";
-import config from "../config"; // config with SEO, productionUrl, analytics, etc.
-import { Analytics } from "../analytics";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import '../globals.css';
+import { themeEffect } from '@/app/_components/theme-effect';
+import { doge } from '../doge';
+import { Inter } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import ClientComponents from '../client';
+import config from '../config'; // config with SEO, productionUrl, analytics, etc.
+import { Analytics } from '../analytics';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from './header';
 import BottomBar from './bottom-bar';
-import Footer from "../footer"; // Import your new Sidebar
+import Footer from '../footer'; // Import your new Sidebar
 // import { Suspense } from 'react';
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
@@ -17,10 +17,10 @@ const SITE_URL = PRODUCTION_URL;
 
 // Viewport configuration
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   userScalable: true,
-  themeColor: "transparent",
+  themeColor: 'transparent',
 };
 
 // Metadata configuration
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
   description: SEO.description,
   keywords: [...SEO.keywords],
   manifest:
-    process.env.NODE_ENV === "production"
-      ? "/manifest.prod.json"
-      : "/manifest.json",
+    process.env.NODE_ENV === 'production'
+      ? '/manifest.prod.json'
+      : '/manifest.json',
   openGraph: {
     title: SEO.title,
     description: SEO.description,
@@ -43,10 +43,10 @@ export const metadata: Metadata = {
         alt: SEO.title,
       },
     ],
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     site: SEO.socials.twitter,
     creator: SEO.socials.twitter,
     images: [
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [{ url: "/icons/192x192.png", sizes: "192x192", type: "image/png" }],
-    apple: [{ url: "/icons/180x180.png", sizes: "180x180" }],
+    icon: [{ url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: '/icons/180x180.png', sizes: '180x180' }],
   },
   metadataBase: new URL(SITE_URL),
 };
@@ -91,12 +91,12 @@ export default function RootLayout({
       </head>
 
       <body className={`${inter.className} antialiased m-auto`}>
-         <Header />
+        <Header />
         <main className="pt-[116px] sm:mx-auto max-w-screen-2xl px-6 pt-16 min-h-screen relative z-0">
-         {children}
+          {children}
         </main>
-         <Footer/>
-         <BottomBar showLabels/>
+        <Footer />
+        <BottomBar showLabels />
         <ClientComponents />
         <Analytics />
         <SpeedInsights />

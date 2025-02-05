@@ -9,7 +9,10 @@ interface AuthButtonProps {
   type?: 'login' | 'signup';
 }
 
-const AuthButton: React.FC<AuthButtonProps> = ({ className = '', type = 'login' }) => {
+const AuthButton: React.FC<AuthButtonProps> = ({
+  className = '',
+  type = 'login',
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isSignup = type === 'signup';
@@ -42,7 +45,13 @@ const AuthButton: React.FC<AuthButtonProps> = ({ className = '', type = 'login' 
         {isSignup ? 'Sign up' : 'Log in'}
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={modalTitle} size="md" variation="blur">
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title={modalTitle}
+        size="md"
+        variation="blur"
+      >
         <LoginForm />
       </Modal>
     </>

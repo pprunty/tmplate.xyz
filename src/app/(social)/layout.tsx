@@ -1,16 +1,16 @@
-import "../globals.css";
-import { themeEffect } from "@/app/_components/theme-effect";
-import { doge } from "../doge";
-import { Inter } from "next/font/google";
-import type { Metadata, Viewport } from "next";
-import ClientComponents from "../client";
-import config from "../config"; // config with SEO, productionUrl, analytics, etc.
-import { Analytics } from "../analytics";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import '../globals.css';
+import { themeEffect } from '@/app/_components/theme-effect';
+import { doge } from '../doge';
+import { Inter } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import ClientComponents from '../client';
+import config from '../config'; // config with SEO, productionUrl, analytics, etc.
+import { Analytics } from '../analytics';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import BottomBar from './bottom-bar';
-import Sidebar from "./sidebar";
-import Header from "./header"; // <-- Import your new header
-import CTA from "@/app/_layout/cta";
+import Sidebar from './sidebar';
+import Header from './header'; // <-- Import your new header
+import CTA from '@/app/_layout/cta';
 import { Suspense } from 'react';
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
@@ -18,10 +18,10 @@ const SITE_URL = PRODUCTION_URL;
 
 // Viewport configuration
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   userScalable: true,
-  themeColor: "transparent",
+  themeColor: 'transparent',
 };
 
 // Metadata configuration
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   description: SEO.description,
   keywords: [...SEO.keywords],
   manifest:
-    process.env.NODE_ENV === "production"
-      ? "/manifest.prod.json"
-      : "/manifest.json",
+    process.env.NODE_ENV === 'production'
+      ? '/manifest.prod.json'
+      : '/manifest.json',
   openGraph: {
     title: SEO.title,
     description: SEO.description,
@@ -44,10 +44,10 @@ export const metadata: Metadata = {
         alt: SEO.title,
       },
     ],
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     site: SEO.socials.twitter,
     creator: SEO.socials.twitter,
     images: [
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [{ url: "/icons/192x192.png", sizes: "192x192", type: "image/png" }],
-    apple: [{ url: "/icons/180x180.png", sizes: "180x180" }],
+    icon: [{ url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: '/icons/180x180.png', sizes: '180x180' }],
   },
   metadataBase: new URL(SITE_URL),
 };
@@ -70,9 +70,17 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} font-sans antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} font-sans antialiased`}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -82,20 +90,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-            <body className="max-w-2xl m-auto sm:px-6">
-              {/* Desktop Sidebar */}
-              <div className="sm:flex sm:h-screen sm:overflow-hidden">
-                <Sidebar />
+      <body className="max-w-2xl m-auto sm:px-6">
+        {/* Desktop Sidebar */}
+        <div className="sm:flex sm:h-screen sm:overflow-hidden">
+          <Sidebar />
 
-                <div className="hidden sm:block fixed top-4 right-4 z-[55]">
-                  <CTA options={["auth"]} />
-                </div>
+          <div className="hidden sm:block fixed top-4 right-4 z-[55]">
+            <CTA options={['auth']} />
+          </div>
 
-                <Header />
+          <Header />
 
-                {/* Main content area with fixed background and scrollable interior */}
-                <main
-                  className="
+          {/* Main content area with fixed background and scrollable interior */}
+          <main
+            className="
                     relative
                     sm:flex-grow
                     sm:overflow-auto
@@ -108,33 +116,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     p-6
                     sm:mt-16
                   "
-                >
-                  <div className="sm:min-h-[calc(100vh-4rem)]">{children}</div>
-                  {/* Mobile Bottom Bar */}
-                  <Suspense fallback={null}>
-                    <BottomBar />
-                  </Suspense>
-                </main>
-              </div>
+          >
+            <div className="sm:min-h-[calc(100vh-4rem)]">{children}</div>
+            {/* Mobile Bottom Bar */}
+            <Suspense fallback={null}>
+              <BottomBar />
+            </Suspense>
+          </main>
+        </div>
 
-              {/* Global client components and scripts */}
-              <ClientComponents />
-              <Analytics />
-              <SpeedInsights />
+        {/* Global client components and scripts */}
+        <ClientComponents />
+        <Analytics />
+        <SpeedInsights />
 
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.gaMeasurementId}`} />
-              <script
-                id="google-analytics"
-                dangerouslySetInnerHTML={{
-                  __html: `
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${analytics.gaMeasurementId}`}
+        />
+        <script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
                     gtag('config', '${analytics.gaMeasurementId}');
                   `,
-                }}
-              />
-            </body>
+          }}
+        />
+      </body>
     </html>
-  )
+  );
 }

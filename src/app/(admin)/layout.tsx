@@ -1,25 +1,25 @@
-import "../globals.css";
-import { themeEffect } from "@/app/_components/theme-effect";
-import { doge } from "../doge";
-import { Inter } from "next/font/google";
-import type { Metadata, Viewport } from "next";
-import ClientComponents from "../client";
-import config from "../config"; // config with SEO, productionUrl, analytics, etc.
-import { Analytics } from "../analytics";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Header from "./header";
-import Sidebar from "./sidebar"; // Import your new Sidebar
-import Footer from "../footer"; // Import your new Sidebar
+import '../globals.css';
+import { themeEffect } from '@/app/_components/theme-effect';
+import { doge } from '../doge';
+import { Inter } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import ClientComponents from '../client';
+import config from '../config'; // config with SEO, productionUrl, analytics, etc.
+import { Analytics } from '../analytics';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import Header from './header';
+import Sidebar from './sidebar'; // Import your new Sidebar
+import Footer from '../footer'; // Import your new Sidebar
 
 const { seo: SEO, productionUrl: PRODUCTION_URL, analytics } = config;
 const SITE_URL = PRODUCTION_URL;
 
 // Viewport configuration
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   userScalable: true,
-  themeColor: "transparent",
+  themeColor: 'transparent',
 };
 
 // Metadata configuration
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   description: SEO.description,
   keywords: [...SEO.keywords],
   manifest:
-    process.env.NODE_ENV === "production"
-      ? "/manifest.prod.json"
-      : "/manifest.json",
+    process.env.NODE_ENV === 'production'
+      ? '/manifest.prod.json'
+      : '/manifest.json',
   openGraph: {
     title: SEO.title,
     description: SEO.description,
@@ -42,10 +42,10 @@ export const metadata: Metadata = {
         alt: SEO.title,
       },
     ],
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     site: SEO.socials.twitter,
     creator: SEO.socials.twitter,
     images: [
@@ -56,19 +56,23 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [{ url: "/icons/192x192.png", sizes: "192x192", type: "image/png" }],
-    apple: [{ url: "/icons/180x180.png", sizes: "180x180" }],
+    icon: [{ url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: '/icons/180x180.png', sizes: '180x180' }],
   },
   metadataBase: new URL(SITE_URL),
 };
 
 const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
@@ -84,9 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body
-        className={`${inter.className} antialiased`}
-      >
+      <body className={`${inter.className} antialiased`}>
         {/* 1) Full-height container, no scrolling */}
         <div className="h-screen w-full overflow-hidden md:flex">
           {/* 2) Sticky or fixed sidebar */}
@@ -128,4 +130,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-

@@ -1,109 +1,122 @@
-import { Home, Search, User, Settings, ShoppingBag, Users, Percent, FileText } from "lucide-react";
+import {
+  Home,
+  Search,
+  User,
+  Settings,
+  ShoppingBag,
+  Users,
+  Percent,
+  FileText,
+} from 'lucide-react';
 
 export interface Route {
   href: string;
   translationKey: string;
   label: string;
-  icon?: React.ComponentType<{ className?: string; size?: number } & React.SVGProps<SVGSVGElement>>;
+  icon?: React.ComponentType<
+    { className?: string; size?: number } & React.SVGProps<SVGSVGElement>
+  >;
   role?: string[];
   children?: Route[];
   showInLayouts?: string[];
 }
 
 // Define the prefix (e.g., "admin")
-const PREFIX = "/stacked";
+const PREFIX = '/stacked';
 
 // Helper function to recursively add prefix to href values
 const addPrefixToRoutes = (routes: Route[], prefix: string): Route[] => {
-  return routes.map(route => ({
+  return routes.map((route) => ({
     ...route,
     href: `${prefix}${route.href}`, // Add prefix to route
-    children: route.children ? addPrefixToRoutes(route.children, prefix) : undefined, // Recursively apply to children
+    children: route.children
+      ? addPrefixToRoutes(route.children, prefix)
+      : undefined, // Recursively apply to children
   }));
 };
 
 // Base routes (without prefix)
 const baseRoutes: Route[] = [
   {
-    href: "/",
-    translationKey: "home",
-    label: "Home",
+    href: '/',
+    translationKey: 'home',
+    label: 'Home',
     icon: Home,
     showInLayouts: ['admin', 'stacked', 'bottom-bar'],
   },
   {
-    href: "/profile",
-    translationKey: "profile",
-    label: "Profile",
+    href: '/profile',
+    translationKey: 'profile',
+    label: 'Profile',
     icon: User,
     showInLayouts: ['basic', 'stacked', 'bottom-bar'],
   },
   {
-    href: "/settings",
-    translationKey: "settings",
-    label: "Settings",
+    href: '/settings',
+    translationKey: 'settings',
+    label: 'Settings',
     icon: Settings,
-    showInLayouts: ["admin", "stacked"],
+    showInLayouts: ['admin', 'stacked'],
     children: [
       {
-        href: "/settings/account",
-        translationKey: "account",
-        label: "Account Settings",
+        href: '/settings/account',
+        translationKey: 'account',
+        label: 'Account Settings',
         icon: FileText,
-        showInLayouts: ["admin"],
+        showInLayouts: ['admin'],
       },
       {
-        href: "/settings/privacy",
-        translationKey: "privacy",
-        label: "Privacy Policy",
+        href: '/settings/privacy',
+        translationKey: 'privacy',
+        label: 'Privacy Policy',
         icon: FileText,
-        showInLayouts: ["admin", "Footer"],
+        showInLayouts: ['admin', 'Footer'],
       },
     ],
   },
   {
-    href: "/products",
-    translationKey: "products",
-    label: "Products",
+    href: '/products',
+    translationKey: 'products',
+    label: 'Products',
     icon: ShoppingBag,
-    role: ["admin"],
+    role: ['admin'],
     children: [
       {
-        href: "/products/new",
-        translationKey: "newProduct",
-        label: "Add New Product",
+        href: '/products/new',
+        translationKey: 'newProduct',
+        label: 'Add New Product',
         icon: FileText,
-        role: ["admin"],
+        role: ['admin'],
       },
       {
-        href: "/products/list",
-        translationKey: "productList",
-        label: "Product List",
+        href: '/products/list',
+        translationKey: 'productList',
+        label: 'Product List',
         icon: FileText,
-        role: ["admin"],
+        role: ['admin'],
       },
     ],
   },
   {
-    href: "/customers",
-    translationKey: "customers",
-    label: "Customers",
+    href: '/customers',
+    translationKey: 'customers',
+    label: 'Customers',
     icon: Users,
-    role: ["admin"],
+    role: ['admin'],
   },
   {
-    href: "/search",
-    translationKey: "search",
-    label: "Search",
+    href: '/search',
+    translationKey: 'search',
+    label: 'Search',
     icon: Search,
-    showInLayouts: ["stacked", "admin", "bottom-bar"],
+    showInLayouts: ['stacked', 'admin', 'bottom-bar'],
   },
   {
-    href: "/discounts",
-    translationKey: "discounts",
-    label: "Discounts",
+    href: '/discounts',
+    translationKey: 'discounts',
+    label: 'Discounts',
     icon: Percent,
-    role: ["admin"],
+    role: ['admin'],
   },
 ];
 

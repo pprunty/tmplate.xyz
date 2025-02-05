@@ -49,7 +49,11 @@ const Modal: React.FC<ModalProps> = ({
   // Determine the effective variation:
   // If the passed variation is "mobileSlide" and we're not on mobile, then default to "blur".
   const effectiveVariation =
-    variation === 'mobileSlide' ? (isMobile ? 'mobileSlide' : 'blur') : variation;
+    variation === 'mobileSlide'
+      ? isMobile
+        ? 'mobileSlide'
+        : 'blur'
+      : variation;
 
   const sizeClasses = {
     sm: 'max-w-sm',
@@ -59,15 +63,17 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   // For non-mobileSlide variants, use sizeClasses for the modal width.
-  const modalSizeClass = mobileSize ? `${sizeClasses[size]}` : sizeClasses[size];
+  const modalSizeClass = mobileSize
+    ? `${sizeClasses[size]}`
+    : sizeClasses[size];
 
   // For mobileSlide and blur, we want a blurred overlay.
   const overlayClass =
     effectiveVariation === 'blur' || effectiveVariation === 'mobileSlide'
       ? 'bg-[#fff] dark:bg-[#131313] bg-opacity-30 dark:bg-opacity-50 backdrop-blur-sm'
       : effectiveVariation === 'backdrop'
-      ? 'bg-black bg-opacity-50'
-      : '';
+        ? 'bg-black bg-opacity-50'
+        : '';
 
   // For mobileSlide, we want full width with no horizontal margins.
   // Otherwise, add side margins (so that on desktop it isn't full width).
@@ -76,77 +82,77 @@ const Modal: React.FC<ModalProps> = ({
       ? 'w-full h-[60vh] rounded-t-lg animate-slideUp'
       : `${modalSizeClass} mx-4 animate-modalShow rounded-lg`;
 
-return createPortal(
-  <div
-    className={clsx(
-      'fixed inset-0 z-[9999] p-1 sm:p-2 flex justify-center',
-      effectiveVariation === 'mobileSlide' ? 'items-end' : 'items-center'
-    )}
-  >
-    {/* Overlay with onClick for closing */}
-    <div
-      className={clsx('absolute inset-0 z-0', overlayClass)}
-      onClick={onClose}
-      aria-hidden="true"
-    />
-
-    {/* Modal container with explicit z-index */}
+  return createPortal(
     <div
       className={clsx(
-        'relative z-10 bg-primary-background-light dark:bg-primary-background-dark shadow-xl border border-primary-border-light dark:border-primary-border-dark transition-transform duration-300',
-        containerClass
+        'fixed inset-0 z-[9999] p-1 sm:p-2 flex justify-center',
+        effectiveVariation === 'mobileSlide' ? 'items-end' : 'items-center',
       )}
-      onClick={(e) => e.stopPropagation()}
     >
-      {title && (
-        <div
-          className={clsx(
-            'p-4 border-b border-primary-border-light dark:border-primary-border-dark flex items-center justify-between'
-          )}
-        >
-          <h2 className="text-2xl font-semibold text-primary-text-light dark:text-primary-text-dark">
-            {title}
-          </h2>
-          <button
+      {/* Overlay with onClick for closing */}
+      <div
+        className={clsx('absolute inset-0 z-0', overlayClass)}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Modal container with explicit z-index */}
+      <div
+        className={clsx(
+          'relative z-10 bg-primary-background-light dark:bg-primary-background-dark shadow-xl border border-primary-border-light dark:border-primary-border-dark transition-transform duration-300',
+          containerClass,
+        )}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {title && (
+          <div
             className={clsx(
-              'p-2 rounded-lg bg-primary-background-light dark:bg-primary-background-dark',
-              'hover:bg-primary-background-hover-light dark:hover:bg-primary-background-hover-dark',
-              'active:bg-primary-background-active-light dark:active:bg-primary-background-active-dark',
-              'transition-opacity'
+              'p-4 border-b border-primary-border-light dark:border-primary-border-dark flex items-center justify-between',
             )}
-            onClick={onClose}
-            aria-label="Close"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="w-5 h-5"
+            <h2 className="text-2xl font-semibold text-primary-text-light dark:text-primary-text-dark">
+              {title}
+            </h2>
+            <button
+              className={clsx(
+                'p-2 rounded-lg bg-primary-background-light dark:bg-primary-background-dark',
+                'hover:bg-primary-background-hover-light dark:hover:bg-primary-background-hover-dark',
+                'active:bg-primary-background-active-light dark:active:bg-primary-background-active-dark',
+                'transition-opacity',
+              )}
+              onClick={onClose}
+              aria-label="Close"
             >
-              <path
-                d="M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M6 6L18 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      )}
-      <div>{children}</div>
-    </div>
-  </div>,
-  document.body
-);
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="w-5 h-5"
+              >
+                <path
+                  d="M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+        <div>{children}</div>
+      </div>
+    </div>,
+    document.body,
+  );
 };
 
 export default Modal;
