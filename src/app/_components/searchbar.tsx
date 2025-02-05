@@ -12,8 +12,8 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  placeholder = "⌘ K  Search anything...",
-  className = "",
+  placeholder = '⌘ K  Search anything...',
+  className = '',
   variation = 'input', // default to "input"
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +48,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <Input
             placeholder={placeholder}
             className="hidden sm:flex min-w-[300px] text-secondary-text-light dark:text-secondary-text-dark"
-            icon={<Search className="h-4 w-4 text-secondary-text-light dark:text-secondary-text-dark" />}
+            icon={
+              <Search className="h-4 w-4 text-secondary-text-light dark:text-secondary-text-dark" />
+            }
           />
         )}
         {variation === 'full' && (
@@ -80,10 +82,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
       </div>
 
       {/* Modal triggered by pressing ⌘+K, Ctrl+K, or clicking the mobile icon */}
-      <Modal isOpen={isOpen} onClose={onClose} title={"Search"} size="lg" variation={"mobileSlide"}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title={'Search'}
+        size="lg"
+        variation={'mobileSlide'}
+      >
         <div className="p-4 text-secondary-text-light dark:text-secondary-text-dark">
           {/* Enhanced search or command palette content goes here */}
-          <p>This is where your enhanced search or command palette content goes.</p>
+          <p>
+            This is where your enhanced search or command palette content goes.
+          </p>
         </div>
       </Modal>
     </>

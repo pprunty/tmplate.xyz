@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import Logo from "../logo";
-import { routes } from "./routes";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Logo from '../logo';
+import { routes } from './routes';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -35,8 +35,8 @@ export default function Sidebar() {
                   href={href}
                   className={`flex items-center gap-3 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                     isActive
-                      ? "bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                      ? 'bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800'
                   }`}
                 >
                   {Icon && <Icon className="w-4 h-4" />}

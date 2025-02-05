@@ -1,19 +1,19 @@
-"use client"
+'use client';
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import CTA, { type CTAOption } from "@/app/_layout/cta"
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import CTA, { type CTAOption } from '@/app/_layout/cta';
 
 export default function AdminHeader() {
-  const pathname = usePathname()
-  const ctaOptions: CTAOption[] = ["auth"]
+  const pathname = usePathname();
+  const ctaOptions: CTAOption[] = ['auth'];
 
   const tabs = [
-    { href: "/admin/dashboard", label: "Dashboard" },
-    { href: "/admin/users", label: "User Management" },
-    { href: "/admin/analytics", label: "Analytics" },
-    { href: "/admin/settings", label: "Settings" },
-  ]
+    { href: '/admin/dashboard', label: 'Dashboard' },
+    { href: '/admin/users', label: 'User Management' },
+    { href: '/admin/analytics', label: 'Analytics' },
+    { href: '/admin/settings', label: 'Settings' },
+  ];
 
   return (
     <header
@@ -39,13 +39,13 @@ export default function AdminHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           {tabs.map(({ href, label }) => {
-            const isActive = pathname === href
+            const isActive = pathname === href;
 
             return (
               <Link
                 key={href}
                 href={href}
-                aria-current={isActive ? "page" : undefined}
+                aria-current={isActive ? 'page' : undefined}
                 className={`
                   group relative overflow-hidden
                   whitespace-nowrap py-4 px-3
@@ -55,9 +55,9 @@ export default function AdminHeader() {
                   ${
                     isActive
                       ? // Active tab: bottom border, special text color
-                        "border-highlight-light dark:border-highlight-dark text-contrast-dark dark:text-contrast-light"
+                        'border-highlight-light dark:border-highlight-dark text-contrast-dark dark:text-contrast-light'
                       : // Inactive tab: no border, normal text
-                        "border-transparent text-primary-text-light dark:text-primary-text-dark"
+                        'border-transparent text-primary-text-light dark:text-primary-text-dark'
                   }
                 `}
               >
@@ -78,10 +78,10 @@ export default function AdminHeader() {
                 {/* Label text on top */}
                 <span className="relative z-10">{label}</span>
               </Link>
-            )
+            );
           })}
         </nav>
       </div>
     </header>
-  )
+  );
 }

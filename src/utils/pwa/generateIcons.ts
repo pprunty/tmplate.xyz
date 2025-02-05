@@ -15,7 +15,8 @@ function ensureDirectoryExistence(dirPath: string): void {
 
 // Clear existing icons in the icons directory
 function clearIconsDirectory(dirPath: string): void {
-  if (fs.existsSync(dirPath)) { // Fix: Added closing parenthesis
+  if (fs.existsSync(dirPath)) {
+    // Fix: Added closing parenthesis
     const files = fs.readdirSync(dirPath);
     for (const file of files) {
       const filePath = path.join(dirPath, file);
@@ -37,7 +38,7 @@ async function resizeAndSave(inputFile: string, size: number): Promise<void> {
 
   try {
     const image = sharp(inputFile).resize({ width: size, height: size });
-      await image.toFile(outputFile);
+    await image.toFile(outputFile);
   } catch (error) {
     console.error(
       `❌ Error creating icon ${size}x${size}.png:`,

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useRouter, usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useRouter, usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 const layoutOptions = [
-  { label: "Basic", value: "/" },
-  { label: "Admin", value: "/admin" },
-  { label: "Social", value: "/social" },
-  { label: "Stacked", value: "/stacked" },
+  { label: 'Basic', value: '/' },
+  { label: 'Admin', value: '/admin' },
+  { label: 'Social', value: '/social' },
+  { label: 'Stacked', value: '/stacked' },
 ];
 
 function LayoutToggle() {
@@ -17,19 +17,19 @@ function LayoutToggle() {
 
   useEffect(() => {
     // Pick the option with the longest matching value
-    const currentLayout = layoutOptions.reduce<{ label: string; value: string } | null>(
-      (matched, option) => {
-        if (
-          pathname.startsWith(option.value) &&
-          option.value.length > (matched?.value.length || 0)
-        ) {
-          return option;
-        }
-        return matched;
-      },
-      null
-    );
-    setSelectedLayout(currentLayout ? currentLayout.value : "/");
+    const currentLayout = layoutOptions.reduce<{
+      label: string;
+      value: string;
+    } | null>((matched, option) => {
+      if (
+        pathname.startsWith(option.value) &&
+        option.value.length > (matched?.value.length || 0)
+      ) {
+        return option;
+      }
+      return matched;
+    }, null);
+    setSelectedLayout(currentLayout ? currentLayout.value : '/');
   }, [pathname]);
 
   // Until the layout is determined, render nothing
@@ -45,7 +45,10 @@ function LayoutToggle() {
 
   return (
     <div className="flex items-center space-x-3">
-      <label htmlFor="layout-selector" className="text-gray-800 dark:text-gray-200">
+      <label
+        htmlFor="layout-selector"
+        className="text-gray-800 dark:text-gray-200"
+      >
         Select Layout:
       </label>
       <select

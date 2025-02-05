@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import React, { memo, useMemo } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Logo from "../logo"; // <-- adjust import
-import { routes } from "./routes";    // <-- or wherever your routes live
-import { ThemeSwitcher } from "@/app/_components/theme-switcher";
+import React, { memo, useMemo } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Logo from '../logo'; // <-- adjust import
+import { routes } from './routes'; // <-- or wherever your routes live
+import { ThemeSwitcher } from '@/app/_components/theme-switcher';
 
 const Sidebar = memo(function Sidebar() {
   const pathname = usePathname();
 
   // Filter only the routes that should appear in the sidebar
   const sidebarRoutes = useMemo(() => {
-    return routes.filter((r) => r.showInLayouts?.includes("sidebar"));
+    return routes.filter((r) => r.showInLayouts?.includes('sidebar'));
   }, []);
 
   return (
@@ -48,7 +48,7 @@ const Sidebar = memo(function Sidebar() {
               className={`
                 px-5 py-3 rounded-xl
                 transition-colors duration-300
-                ${isActive ? "bg-gray-800 dark:bg-[#191919]" : "hover:bg-gray-800 hover:dark:bg-[#191919]"}
+                ${isActive ? 'bg-gray-800 dark:bg-[#191919]' : 'hover:bg-gray-800 hover:dark:bg-[#191919]'}
               `}
             >
               {Icon && <Icon className="w-6 h-6" />}
@@ -65,5 +65,5 @@ const Sidebar = memo(function Sidebar() {
   );
 });
 
-Sidebar.displayName = "Sidebar";
+Sidebar.displayName = 'Sidebar';
 export default Sidebar;

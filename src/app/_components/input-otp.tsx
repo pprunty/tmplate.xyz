@@ -43,7 +43,10 @@ const OTPInput: React.FC<OTPInputProps> = ({
     }
   }, [autoFocus]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     if (disabled) return;
     const newValue = event.target.value.slice(-1);
     const newOtp = [...localOtp];
@@ -54,25 +57,28 @@ const OTPInput: React.FC<OTPInputProps> = ({
     if (newValue === '') {
       newErrors[index] = false;
       if (setFieldError) {
-        setFieldError("otp", "");
+        setFieldError('otp', '');
       }
     } else {
       const isValid = isValidInput(newValue, inputType);
       if (!isValid) {
         if (setFieldError) {
-          setFieldError("otp", `invalid character '${newValue}'. only numeric values allowed`);
+          setFieldError(
+            'otp',
+            `invalid character '${newValue}'. only numeric values allowed`,
+          );
         }
         newErrors[index] = true;
       } else {
         if (setFieldError) {
-          setFieldError("otp", "");
+          setFieldError('otp', '');
         }
         newErrors[index] = false;
       }
     }
     setErrors(newErrors);
 
-    const isOtpComplete = newOtp.every(val => val.length === 1);
+    const isOtpComplete = newOtp.every((val) => val.length === 1);
     if (isOtpComplete && !newErrors.includes(true)) {
       onChange({
         target: {
@@ -98,10 +104,13 @@ const OTPInput: React.FC<OTPInputProps> = ({
     if (setFieldTouched) setFieldTouched(name, true);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     const newErrors = [...errors];
 
-    if (e.key === "Backspace") {
+    if (e.key === 'Backspace') {
       e.preventDefault();
       newErrors[index] = false;
       setErrors(newErrors);
@@ -113,8 +122,8 @@ const OTPInput: React.FC<OTPInputProps> = ({
         onChange({
           target: {
             name: name,
-            value: newOtp.join('')
-          }
+            value: newOtp.join(''),
+          },
         });
         inputRefs.current[index - 1]?.focus();
       } else {
@@ -122,10 +131,10 @@ const OTPInput: React.FC<OTPInputProps> = ({
         newOtp[index] = '';
         setLocalOtp(newOtp);
       }
-    } else if (e.key === "ArrowLeft" && index > 0) {
+    } else if (e.key === 'ArrowLeft' && index > 0) {
       e.preventDefault();
       inputRefs.current[index - 1]?.focus();
-    } else if (e.key === "ArrowRight" && index < length - 1) {
+    } else if (e.key === 'ArrowRight' && index < length - 1) {
       e.preventDefault();
       inputRefs.current[index + 1]?.focus();
     }
@@ -141,10 +150,12 @@ const OTPInput: React.FC<OTPInputProps> = ({
             type={inputType === 'numeric' ? 'tel' : 'text'}
             maxLength={1}
             value={localOtp[index]}
-            onChange={e => handleChange(e, index)}
+            onChange={(e) => handleChange(e, index)}
             onBlur={handleBlur}
-            onKeyDown={e => handleKeyDown(e, index)}
-            ref={el => { inputRefs.current[index] = el; }}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             className={`
               flex-grow w-full max-w-[4rem]
               h-14 sm:h-13
@@ -165,7 +176,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
 
 const isValidInput = (
   value: string,
-  inputType: 'alphanumeric' | 'alphabetic' | 'numeric'
+  inputType: 'alphanumeric' | 'alphabetic' | 'numeric',
 ): boolean => {
   const regexMap = {
     alphanumeric: /^[a-z0-9]$/i,

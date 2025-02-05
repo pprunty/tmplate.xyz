@@ -2,18 +2,13 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ThemeSwitcher } from "@/app/_components/theme-switcher";
+import { ThemeSwitcher } from '@/app/_components/theme-switcher';
 import { urlMapping, SocialIcon } from '@/app/_components/social-icon';
 import config from '@/app/config';
 
 export default function Footer() {
-  const {
-    show_social_icons,
-    newsletter,
-    logo,
-    mobile_app,
-    show_footer,
-  } = config.footer;
+  const { show_social_icons, newsletter, logo, mobile_app, show_footer } =
+    config.footer;
 
   if (!show_footer) {
     return null;
@@ -57,19 +52,20 @@ export default function Footer() {
               </span>
             )}
             <p className="mb-4 font-mono text-[13px] text-secondary-text-light dark:text-secondary-text-dark">
-              {`${new Date().getFullYear()}`} {`${brandName}${companyType ? ` ${companyType}` : ''}`}
+              {`${new Date().getFullYear()}`}{' '}
+              {`${brandName}${companyType ? ` ${companyType}` : ''}`}
             </p>
 
             {/* Social Icons */}
             {show_social_icons && (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
                 {(
                   [
                     'github',
                     'twitter',
+                    'instagram',
                     'youtube',
                     'linkedin',
-                    'instagram',
                     'tiktok',
                   ] as const
                 ).map((platform) =>
@@ -83,7 +79,7 @@ export default function Footer() {
                     >
                       <SocialIcon platform={platform} />
                     </a>
-                  ) : null
+                  ) : null,
                 )}
               </div>
             )}

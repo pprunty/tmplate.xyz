@@ -121,55 +121,64 @@ const LoginForm: React.FC = () => {
                   setShowOTP(true);
                 }}
               >
-{({ isSubmitting, errors, touched, setFieldError, setFieldTouched }: FormikProps<{ email: string; otp: string }>) => (
-  <Form>
-    <div className="mt-4">
-      <Field
-        name="email"
-        id="email"
-        type="email"
-        as={Input}
-        placeholder="Enter your email address..."
-        className="py-[10px]"
-        required
-        autoFocus={true}
-        disabled={showOTP}
-      />
-      {errors.email && touched.email && (
-        <div className="text-red-500 text-sm mt-1">{errors.email}</div>
-      )}
-      {showOTP && (
-        <div className="mt-4">
-          <label
-            htmlFor="otp"
-            className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
-          >
-            Login code
-          </label>
-          <OTPInput
-            id="otp"
-            name="otp"
-            length={6}
-            onChange={({ target: { value } }) => console.log('OTP Entered:', value)}
-            onBlur={() => console.log('OTP Field Blurred')}
-            setFieldError={setFieldError}
-            setFieldTouched={setFieldTouched}
-          />
-        </div>
-      )}
-    </div>
-    <div className="mt-6">
-      <Button
-        type="submit"
-        variation="submit"
-        disabled={isSubmitting}
-      >
-        {showOTP ? 'Continue with login code' : 'Continue'}
-      </Button>
-    </div>
-  </Form>
-)}
-
+                {({
+                  isSubmitting,
+                  errors,
+                  touched,
+                  setFieldError,
+                  setFieldTouched,
+                }: FormikProps<{ email: string; otp: string }>) => (
+                  <Form>
+                    <div className="mt-4">
+                      <Field
+                        name="email"
+                        id="email"
+                        type="email"
+                        as={Input}
+                        placeholder="Enter your email address..."
+                        className="py-[10px]"
+                        required
+                        autoFocus={true}
+                        disabled={showOTP}
+                      />
+                      {errors.email && touched.email && (
+                        <div className="text-red-500 text-sm mt-1">
+                          {errors.email}
+                        </div>
+                      )}
+                      {showOTP && (
+                        <div className="mt-4">
+                          <label
+                            htmlFor="otp"
+                            className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+                          >
+                            Login code
+                          </label>
+                          <OTPInput
+                            id="otp"
+                            name="otp"
+                            length={6}
+                            onChange={({ target: { value } }) =>
+                              console.log('OTP Entered:', value)
+                            }
+                            onBlur={() => console.log('OTP Field Blurred')}
+                            setFieldError={setFieldError}
+                            setFieldTouched={setFieldTouched}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-6">
+                      <Button
+                        type="submit"
+                        variation="submit"
+                        disabled={isSubmitting}
+                      >
+                        {showOTP ? 'Continue with login code' : 'Continue'}
+                      </Button>
+                    </div>
+                  </Form>
+                )}
               </Formik>
             </div>
           </div>
@@ -200,12 +209,16 @@ const LoginForm: React.FC = () => {
                   setShowOTP(true);
                 }}
               >
-                {({ isSubmitting, errors, touched }: FormikProps<{ email: string; otp: string }>) => (
+                {({
+                  isSubmitting,
+                  errors,
+                  touched,
+                }: FormikProps<{ email: string; otp: string }>) => (
                   <Form>
                     <div className="mt-4">
                       <label
                         htmlFor="email"
-                className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+                        className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
                       >
                         Email
                       </label>
@@ -221,13 +234,15 @@ const LoginForm: React.FC = () => {
                         disabled={showOTP}
                       />
                       {errors.email && touched.email && (
-                        <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+                        <div className="text-red-500 text-sm mt-1">
+                          {errors.email}
+                        </div>
                       )}
                       {showOTP && (
                         <div className="mt-4">
                           <label
                             htmlFor="otp"
-                className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
+                            className="block text-secondary-text-light dark:text-secondary-text-dark text-sm font-medium mb-2"
                           >
                             Login code
                           </label>
@@ -235,17 +250,23 @@ const LoginForm: React.FC = () => {
                             id="otp"
                             name="otp"
                             length={6}
-                            onChange={({ target: { value } }) => console.log('OTP Entered:', value)}
+                            onChange={({ target: { value } }) =>
+                              console.log('OTP Entered:', value)
+                            }
                             onBlur={() => console.log('OTP Field Blurred')}
                           />
                         </div>
                       )}
                     </div>
                     <div className="mt-6">
-                      <Button type="submit"
-                      variation="submit"
-                       disabled={isSubmitting}>
-                        {showOTP ? 'Continue with login code' : 'Continue with email'}
+                      <Button
+                        type="submit"
+                        variation="submit"
+                        disabled={isSubmitting}
+                      >
+                        {showOTP
+                          ? 'Continue with login code'
+                          : 'Continue with email'}
                       </Button>
                     </div>
                   </Form>

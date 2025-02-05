@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { Cross as Hamburger } from 'hamburger-react';
 import clsx from 'clsx';
 import Logo from '../logo';
 import CTA from '../_layout/cta';
-import { routes } from "./routes";
+import { routes } from './routes';
 
 interface HeaderProps {
   scrollResponsive?: boolean;
@@ -53,12 +53,12 @@ export default function Header({
   return (
     <header
       className={clsx(
-        "z-50 top-0",
-        "backdrop-blur-lg bg-primary-background-light/85 dark:bg-primary-background-dark/85",
-        "border-b border-primary-border-light dark:border-primary-border-dark",
-        "transition-transform duration-300 ease-in-out",
+        'z-50 top-0',
+        'backdrop-blur-lg bg-primary-background-light/85 dark:bg-primary-background-dark/85',
+        'border-b border-primary-border-light dark:border-primary-border-dark',
+        'transition-transform duration-300 ease-in-out',
         scrollResponsive ? 'fixed left-0 right-0' : 'sticky',
-        !isVisible && scrollResponsive && '-translate-y-full'
+        !isVisible && scrollResponsive && '-translate-y-full',
       )}
     >
       {/* Constrain header inner content with a max-width */}
@@ -113,9 +113,11 @@ export default function Header({
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="xl:hidden absolute top-16 left-0 right-0
+          <div
+            className="xl:hidden absolute top-16 left-0 right-0
             bg-primary-background-light dark:bg-primary-background-dark
-          ">
+          "
+          >
             <nav className="flex flex-col p-4 gap-2">
               {routes.map((route) => (
                 <Link
