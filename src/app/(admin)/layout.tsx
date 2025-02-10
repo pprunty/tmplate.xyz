@@ -88,7 +88,7 @@ export default function RootLayout({
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
 
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased bg-pattern bg-repeat`}>
         {/* 1) Full-height container, no scrolling */}
         <div className="h-screen w-full overflow-hidden md:flex">
           {/* 2) Sticky or fixed sidebar */}

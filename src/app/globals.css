@@ -21,6 +21,15 @@
     @apply text-[#fcfcfc];
   }
 
+    .bg-pattern {
+      background-image: url('/bgl.svg');
+      background-repeat: repeat;
+    }
+    .dark .bg-pattern {
+      background-image: url('/bgd.svg');
+      background-repeat: repeat;
+    }
+
   /* Prevent transition delays */
   :root.pause-transitions * {
     transition-duration: 0ms !important;
